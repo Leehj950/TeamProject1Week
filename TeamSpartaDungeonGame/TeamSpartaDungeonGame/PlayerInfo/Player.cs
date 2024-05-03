@@ -4,30 +4,77 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeamSpartaDungeonGame.ItemInfo;
+using TeamSpartaDungeonGame.Utility;
+using TeamSpartaDungeonGame.Interface;
 
 namespace TeamSpartaDungeonGame.PlayerInfo
 {
-    internal class Player
+    
+    internal class Player : IAction
     {
-        private List<Item> inventory;
-        public string Name { get; }
-        public string Job { get; }
-        public int Level { get; }
+        Stat stat = new Stat();
+        public string Name { get; set; }
+        
+        
 
-        public float Atk { get; }
-        public int Def { get; }
-        public int Hp { get; }
-        public int Gold { get; }
-
-        public Player( string name, string job, int level, float atk, int def, int hp, int gold)
+        public void Attack()
         {
-            Name = name;
-            Job = job;
-            Level = level;
-            Atk = atk;
-            Def = def;
-            Hp = hp;
-            Gold = gold;
+            Console.WriteLine("공격할 몬스터를 선택해주세요\n");
+            Console.WriteLine("1. {0} \n 2. {1} \n 3. {2} \n", Monster );
+            Console.Write(" >> ");
+            int playerChoice = ConsoleUtility.PromptMenuChoice(1, 3);
+
+            switch (playerChoice)
+            {
+
+            }
+        }
+
+        public void Death()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void StatusMenu()
+        {
+            // 캐릭터 상태창
+            Console.Clear();
+
+            Console.WriteLine("캐릭터 상태보기");
+            Console.WriteLine();
+        }
+
+        
+
+        public void UsingItem()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Critical()
+        {
+            int finalDmg;
+            int critProb;
+            critProb = new Random().Next(1, 100);
+            finalDmg = new Random().Next((int)(stat.atk * 0.9), (int)(stat.atk * 1.1));
+            if (critProb <= stat.crit) 
+            {
+                Console.WriteLine("치명타 !!!");
+                finalDmg *= stat.critd;
+            }
+            else
+            {
+                
+            }
+
+            return finalDmg;
+        }
+
+        public int Dodge()
+        {
+            int dodgeProb;
+
+               
         }
     }
 }
