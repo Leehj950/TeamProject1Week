@@ -8,11 +8,11 @@ namespace TeamSpartaDungeonGame.Interface
 {
     internal interface IAction
     {
+
         public void Attack();
         public void Death();
         public void UsingItem();
         public int Critical();
         public void Dodge();
     }
-}
 
