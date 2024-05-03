@@ -15,4 +15,5 @@ namespace TeamSpartaDungeonGame.Interface
         public int Critical();
         public void Dodge();
     }
+}
 
