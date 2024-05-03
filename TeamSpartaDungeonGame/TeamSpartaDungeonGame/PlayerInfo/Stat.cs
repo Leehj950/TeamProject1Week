@@ -9,6 +9,9 @@ namespace TeamSpartaDungeonGame.PlayerInfo
 {
     public class Stat
     {
+
+
+
         Player player;
 
         string Name { get; set; }
@@ -22,7 +25,10 @@ namespace TeamSpartaDungeonGame.PlayerInfo
         public int Critd { get; set; }// 크리티컬 데미지
         public int Dodge { get; set; }// 회피 확률
 
-        public Stat()
+
+
+        public Stat() 
+
         {
             Name = "";
             Lv = 1;
@@ -52,7 +58,6 @@ namespace TeamSpartaDungeonGame.PlayerInfo
             Console.WriteLine($"회피 확률 : {Dodge}\n");
             Console.WriteLine($"보유 골드 : {Gold}\n");
         }
-
 
     }
 }
