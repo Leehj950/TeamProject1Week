@@ -14,13 +14,13 @@ namespace TeamSpartaDungeonGame.PlayerInfo
 
         Player player;
 
-        string Name { get; set; }
+        string Name { get; set; }    // 사용자 이름
         public int Lv { get; set; }  // 레  벨
         public int Atk { get; set; } // 공격력
         public int Def { get; set; } // 방어력
         public int Hp { get; set; }  // 체  력
         public int Mp { get; set; }  // 마  나
-        public int Gold { get; set; }
+        public int Gold { get; set; } // 보유 골드
         public int Crit { get; set; } // 크리티컬 확률
         public int Critd { get; set; }// 크리티컬 데미지
         public int Dodge { get; set; }// 회피 확률
