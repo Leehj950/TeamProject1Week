@@ -25,7 +25,8 @@ namespace TeamSpartaDungeonGame.PlayerInfo
         public int Level { get; }
 
         Stat stat = new Stat();
-        public string Name { get; set; }
+        
+
 
 
 
@@ -86,18 +87,21 @@ namespace TeamSpartaDungeonGame.PlayerInfo
             {
 
             }
-
-
-
-
-
-
-
-
-
         }
     }
 }
+
+
+
+
+
+
+
+
+
+        
+
+
 
 
        
