@@ -80,7 +80,7 @@ namespace TeamSpartaDungeonGame.Manager
                     if (player.Name == "")
                     {
                         // 캐릭터 만드는 함수 
-
+                        //player
                     }
                     // 그후 로비로 가는 것 의미한다.
                     sceneManager.GameLobby();
