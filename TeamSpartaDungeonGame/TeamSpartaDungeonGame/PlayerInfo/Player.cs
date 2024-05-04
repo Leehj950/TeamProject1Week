@@ -29,5 +29,8 @@ namespace TeamSpartaDungeonGame.PlayerInfo
             Hp = hp;
             Gold = gold;
         }
+
+        // 테스트용 만드는 것입니다.
+        public Player() { }
     }
 }
