@@ -12,12 +12,12 @@ namespace TeamSpartaDungeonGame.Manager
     [Serializable]
     internal class DateManager
     {
-        // 플레이어 정보값
-        //DateManager 싱글톤
-        private static DateManager instance;
 
-        //객채를 생성하기위한 싱글톤 함수
-        public static DateManager Instance()
+        // 플레이어 정보값
+        private static DateManager instance;  //DateManager 싱글톤
+
+
+        public static DateManager Instance() //객채를 생성하기위한 싱글톤 함수
         {
             if (instance == null)
             {
@@ -34,7 +34,7 @@ namespace TeamSpartaDungeonGame.Manager
 
         public void SaveDate(Player player, Shop shop)
         {
-            int i = 0;
+
         }
     }
 }

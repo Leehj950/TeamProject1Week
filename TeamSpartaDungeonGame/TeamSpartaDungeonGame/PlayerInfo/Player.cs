@@ -19,10 +19,12 @@ namespace TeamSpartaDungeonGame.PlayerInfo
     {
         Stat stat = new Stat();
 
+        public Stat Stat { get { return stat; } }
+
         public void Attack() // 수정 많이 해야할듯?
         {
             Console.WriteLine("공격할 몬스터를 선택해주세요\n");
-            Console.WriteLine("1. {0} \n 2. {1} \n 3. {2} \n", Monster); // 몬스터가 구현되면 바꿀 예정
+            //Console.WriteLine("1. {0} \n 2. {1} \n 3. {2} \n", Monster); // 몬스터가 구현되면 바꿀 예정
             Console.Write(" >> ");
             int playerChoice = ConsoleUtility.PromptMenuChoice(1, 3);
 
@@ -61,7 +63,7 @@ namespace TeamSpartaDungeonGame.PlayerInfo
             int dodgeProb;
             int takeDmg; // 받는 데미지
 
-            takeDmg = monsterDmg;// 몬스터의 데미지가 구현되면 바꿀 예정
+            //takeDmg = monsterDmg;// 몬스터의 데미지가 구현되면 바꿀 예정
             dodgeProb = new Random().Next(1, 100);
             if (dodgeProb <= stat.Dodge)
             {
@@ -73,31 +75,31 @@ namespace TeamSpartaDungeonGame.PlayerInfo
         public void PlayerJobSet()
         {
 
-            switch (playerChoice) // 플레이어 직업 선택에 따른 스탯 변화
-            {
-                case PlayerJob.PROGRAMMER:
-                    stat.Atk -= 5;
-                    stat.Hp -= 50;
-                    stat.Mp += 100;
-                    break;
-                case PlayerJob.POOR:
-                    stat.Hp += 30;
-                    stat.Def += 5;
-                    stat.Dodge += 15;
-                    break;
-                case PlayerJob.SINGER:
-                    stat.Atk += 5;
-                    stat.Crit += 20;
-                    stat.Critd -= 10;
-                    break;
-                case PlayerJob.RICH:
-                    stat.Hp -= 50;
-                    stat.Mp -= 50;
-                    stat.Def -= 5;
-                    stat.Atk -= 5;
-                    stat.Gold += 10000;
-                    break;
-            }
+            //switch (/*playerChoice*/ ) // 플레이어 직업 선택에 따른 스탯 변화
+            //{
+            //    case PlayerJob.PROGRAMMER:
+            //        stat.Atk -= 5;
+            //        stat.Hp -= 50;
+            //        stat.Mp += 100;
+            //        break;
+            //    case PlayerJob.POOR:
+            //        stat.Hp += 30;
+            //        stat.Def += 5;
+            //        stat.Dodge += 15;
+            //        break;
+            //    case PlayerJob.SINGER:
+            //        stat.Atk += 5;
+            //        stat.Crit += 20;
+            //        stat.Critd -= 10;
+            //        break;
+            //    case PlayerJob.RICH:
+            //        stat.Hp -= 50;
+            //        stat.Mp -= 50;
+            //        stat.Def -= 5;
+            //        stat.Atk -= 5;
+            //        stat.Gold += 10000;
+            //        break;
+            //}
         }
         // 구현 안된거 아래로 내림 ///////////////////////////////////////////
         public void Inventory()

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeamSpartaDungeonGame.Content;
+using TeamSpartaDungeonGame.PlayerInfo;
 
 namespace TeamSpartaDungeonGame.Manager
 {
@@ -14,13 +15,19 @@ namespace TeamSpartaDungeonGame.Manager
         private Dungeon dungeon;
         private RestArea restArea;
         private Shop shop;
+        private Player player;
 
         public SceneManager()
         {
             dungeon = new Dungeon();
-            restArea = new RestArea();
-            shop = new Shop();
-            gameLobby = new GameLobby();
+        }
+
+        public void initalize(Player player)
+        {
+            this.player = player;
+            shop = new Shop(player);
+            gameLobby = new GameLobby(player);
+            restArea = new RestArea(player.Stat);
         }
 
         // SceneManager 싱글톤 
@@ -53,6 +60,9 @@ namespace TeamSpartaDungeonGame.Manager
             restArea.Loop();
         }
 
-        public void 
+        public void ScenePlayerStats( )
+        {
+            
+        }
     }
 }

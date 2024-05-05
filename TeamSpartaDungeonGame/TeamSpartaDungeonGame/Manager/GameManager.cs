@@ -14,9 +14,9 @@ namespace TeamSpartaDungeonGame.Manager
 {
     public enum MenuList
     {
-        GameStart = 1,
-        GameLoad = 2,
-        Exit = 3
+        GAMESTART = 1,
+        GAMELOAD = 2,
+        EXIT = 3
     }
 
     internal class GameManager : IFramework
@@ -32,6 +32,7 @@ namespace TeamSpartaDungeonGame.Manager
             player = new Player();
             dateManager = DateManager.Instance();
             sceneManager = SceneManager.Instance();
+            sceneManager.initalize(player);
             Console.Title = "TeamSpartDungenGame";
             Console.SetWindowSize(122, 52);
         }
@@ -43,18 +44,6 @@ namespace TeamSpartaDungeonGame.Manager
                 return instance = new GameManager();
             }
             return instance;
-        }
-
-        public void Initialize()
-        {
-            player = new Player("test", "Programmer", 1, 10, 5, 100, 15000);
-            Console.SetWindowSize(122, 52);
-            Console.Title = "TeamSpartDungenGame";
-            //
-            player = new Player();
-            // 데이터 매니저를 싱글톤으로 생성함.
-            dateManager = DateManager.Instance();
-            sceneManager = SceneManager.Instance();
         }
 
         public void StartGame()
@@ -80,22 +69,22 @@ namespace TeamSpartaDungeonGame.Manager
 
             switch ((MenuList)choice)
             {
-                case MenuList.GameStart:
+                case MenuList.GAMESTART:
                     Console.WriteLine();
-                    if (player.Name == "")
-                    {
-                        // 캐릭터 만드는 함수 
-                        //player가 만들어지면 만드는 함수
-                    }
+                    //if (Name == "")
+                    //{
+                    //    // 캐릭터 만드는 함수 
+                    //    //player가 만들어지면 만드는 함수
+                    //}
                     // 그후 로비로 가는 것 의미한다.
                     sceneManager.SceneGameLobby();
                     break;
-                case MenuList.GameLoad:
+                case MenuList.GAMELOAD:
                     Console.WriteLine();
                     // 세이브 데이터 불러오기
                     dateManager.LoadDate();
                     break;
-                case MenuList.Exit:
+                case MenuList.EXIT:
                     Console.WriteLine();
                     // 게임 종료
                     Environment.Exit(0);

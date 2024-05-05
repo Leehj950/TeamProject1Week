@@ -22,7 +22,7 @@ namespace TeamSpartaDungeonGame.Content
         /// 변수
         /// </summary>
         private bool isExit = false;
-
+        private bool isDungeonExit = false;
         /// <summary>
         /// 생성자
         /// </summary>
@@ -63,7 +63,6 @@ namespace TeamSpartaDungeonGame.Content
         {
             //나중에 그리거나 글씨를 출력을 여기서모아서 출력하기.
         }
-
         public void Loop()
         {
             while (!isExit)
@@ -71,6 +70,26 @@ namespace TeamSpartaDungeonGame.Content
                 Render();
                 Update();
             }
+        }
+
+        public void DungeonLoop(Difficulty value)
+        {
+            Difficulty select = value;
+            while (!isDungeonExit)
+            {
+                DungeonRender(select);
+                DungeonUpdate(select);
+            }
+        }
+
+        public void DungeonRender(Difficulty value)
+        {
+
+        }
+
+        public void DungeonUpdate(Difficulty value)
+        {
+
         }
     }
 }
