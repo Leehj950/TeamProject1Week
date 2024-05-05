@@ -1,14 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TeamSpartaDungeonGame.ItemInfo;
+﻿using TeamSpartaDungeonGame.Interface;
 using TeamSpartaDungeonGame.Utility;
-using TeamSpartaDungeonGame.Interface;
-using System.Globalization;
-using TeamSpartaDungeonGame.Utility;
-using TeamSpartaDungeonGame.Interface;
 
 
 
@@ -47,24 +38,24 @@ namespace TeamSpartaDungeonGame.PlayerInfo
             // 캐릭터 상태창
             stat.PlayerStatus();
         }
-         public float Critical() // 크리티컬 배수 1.6을 곱해주기 위해서 float 자료형 사용
+        public float Critical() // 크리티컬 배수 1.6을 곱해주기 위해서 float 자료형 사용
         {
             float finalDmg;    // 최종 데미지
             float criticalDmg; // 데미지 1.6배수의 값
             int critProb;
             criticalDmg = (float)(stat.Critd * 0.01);
-            
+
             critProb = new Random().Next(1, 100);
             finalDmg = new Random().Next((int)(stat.Atk * 0.9), (int)(stat.Atk * 1.1));
             if (critProb <= stat.Crit)
             {
                 Console.WriteLine("운좋게 치명타 발생");
-                finalDmg *= criticalDmg; 
+                finalDmg *= criticalDmg;
             }
 
             return finalDmg;
         }
-        
+
         public void Dodge()
         {
             int dodgeProb;
@@ -83,7 +74,7 @@ namespace TeamSpartaDungeonGame.PlayerInfo
         {
 
             switch (playerChoice) // 플레이어 직업 선택에 따른 스탯 변화
-                {
+            {
                 case PlayerJob.PROGRAMMER:
                     stat.Atk -= 5;
                     stat.Hp -= 50;
@@ -106,9 +97,9 @@ namespace TeamSpartaDungeonGame.PlayerInfo
                     stat.Atk -= 5;
                     stat.Gold += 10000;
                     break;
-                }
+            }
         }
-         // 구현 안된거 아래로 내림 ///////////////////////////////////////////
+        // 구현 안된거 아래로 내림 ///////////////////////////////////////////
         public void Inventory()
         {
             // 인벤토리 클래스를 따로 만드는게 나아보임.
@@ -123,7 +114,7 @@ namespace TeamSpartaDungeonGame.PlayerInfo
         }
 
 
-     
+
     }
 }
 
@@ -135,18 +126,18 @@ namespace TeamSpartaDungeonGame.PlayerInfo
 
 
 
-        
 
 
 
 
-       
 
-       
 
-        
-        
 
-       
+
+
+
+
+
+
 
 
