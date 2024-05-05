@@ -9,9 +9,6 @@ namespace TeamSpartaDungeonGame.PlayerInfo
 {
     public class Stat
     {
-
-
-
         Player player;
 
         string Name { get; set; }    // 사용자 이름
@@ -24,10 +21,11 @@ namespace TeamSpartaDungeonGame.PlayerInfo
         public int Crit { get; set; } // 크리티컬 확률
         public int Critd { get; set; }// 크리티컬 데미지
         public int Dodge { get; set; }// 회피 확률
+        public int Exp {  get; set; } // 경험치
         public Stat() 
 
         {
-            Name = "";
+            Name = player.name;
             Lv = 1;
             Atk = 10;
             Def = 10;
@@ -37,6 +35,7 @@ namespace TeamSpartaDungeonGame.PlayerInfo
             Critd = 160;
             Dodge = 10;
             Gold = 2000;
+            Exp = 0;
         }
 
         public void PlayerStatus()
@@ -54,10 +53,14 @@ namespace TeamSpartaDungeonGame.PlayerInfo
             Console.WriteLine($"크리티컬 데미지 : {Critd}");
             Console.WriteLine($"회피 확률 : {Dodge}\n");
             Console.WriteLine($"보유 골드 : {Gold}\n");
+            Console.WriteLine($"현재 경험치 : {Exp}\n");
         }
 
     }
 }
+
+
+
 
 
 
