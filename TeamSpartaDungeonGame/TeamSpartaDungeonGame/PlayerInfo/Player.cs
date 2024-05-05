@@ -17,7 +17,12 @@ namespace TeamSpartaDungeonGame.PlayerInfo
 
     internal class Player : IAction
     {
-        Stat stat = new Stat();
+        Stat stat;
+        public Stat Stat { get; }
+        public Player()
+        {
+            stat = new Stat();
+        }
 
         public void Attack() // 수정 많이 해야할듯?
         {
@@ -70,27 +75,37 @@ namespace TeamSpartaDungeonGame.PlayerInfo
             }
         }
 
-        public void PlayerJobSet()
+        public void CreatePlayer()
+        {
+            Console.WriteLine("직업선택");
+            Console.WriteLine("1. 프로그래머\n2. 거지\n3. 가수\n4. 부자\n");
+            Console.Write("직업을 선택해주세요");
+            Console.WriteLine(">>");
+            int playerChoice = ConsoleUtility.PromptMenuChoice(1, 4);
+            PlayerJobSet(playerChoice);
+        }
+
+        public void PlayerJobSet(int num1)
         {
 
-            switch (playerChoice) // 플레이어 직업 선택에 따른 스탯 변화
+            switch (num1) // 플레이어 직업 선택에 따른 스탯 변화
             {
-                case PlayerJob.PROGRAMMER:
+                case (int)PlayerJob.PROGRAMMER:
                     stat.Atk -= 5;
                     stat.Hp -= 50;
                     stat.Mp += 100;
                     break;
-                case PlayerJob.POOR:
+                case (int)PlayerJob.POOR:
                     stat.Hp += 30;
                     stat.Def += 5;
                     stat.Dodge += 15;
                     break;
-                case PlayerJob.SINGER:
+                case (int)PlayerJob.SINGER:
                     stat.Atk += 5;
                     stat.Crit += 20;
                     stat.Critd -= 10;
                     break;
-                case PlayerJob.RICH:
+                case (int)PlayerJob.RICH:
                     stat.Hp -= 50;
                     stat.Mp -= 50;
                     stat.Def -= 5;
@@ -112,32 +127,5 @@ namespace TeamSpartaDungeonGame.PlayerInfo
         {
             throw new NotImplementedException();
         }
-
-
-
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
