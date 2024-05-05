@@ -34,7 +34,7 @@ namespace TeamSpartaDungeonGame.Manager
 
         public void SaveDate(Player player, Shop shop)
         {
-
+            int i = 0;
         }
     }
 }

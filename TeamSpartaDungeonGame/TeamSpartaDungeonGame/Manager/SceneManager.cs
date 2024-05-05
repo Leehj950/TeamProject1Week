@@ -9,7 +9,7 @@ namespace TeamSpartaDungeonGame.Manager
 {
     internal class SceneManager
     {
-        private static SceneManager instance;
+        private static  SceneManager instance;
         private GameLobby gameLobby;
         private Dungeon dungeon;
         private RestArea restArea;
@@ -33,19 +33,26 @@ namespace TeamSpartaDungeonGame.Manager
             return instance;
         }
 
-        public void GameLobby()
+        public void SceneGameLobby()
         {
             gameLobby.Loop();
         }
 
-        public void Shop()
+        public void SceneShop()
         {
             shop.Loop();
         }
 
-        public void Dungeon()
+        public void SceneDungeon()
         {
             dungeon.Loop();
         }
+
+        public void SceneRsetArea()
+        {
+            restArea.Loop();
+        }
+
+        public void 
     }
 }

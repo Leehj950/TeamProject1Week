@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using TeamSpartaDungeonGame.Interface;
 using TeamSpartaDungeonGame.PlayerInfo;
 
 using TeamSpartaDungeonGame.Utility;
@@ -18,18 +19,21 @@ namespace TeamSpartaDungeonGame.Manager
         Exit = 3
     }
 
-    internal class GameManager
+    internal class GameManager : IFramework
     {
 
         private Player player;
-        private static GameManager instance;
+        private static GameManager instance = null;
         private DateManager dateManager;
         private SceneManager sceneManager;
 
         public GameManager()
         {
-            Initialize();
-
+            player = new Player();
+            dateManager = DateManager.Instance();
+            sceneManager = SceneManager.Instance();
+            Console.Title = "TeamSpartDungenGame";
+            Console.SetWindowSize(122, 52);
         }
 
         public static GameManager Instance()
@@ -43,7 +47,6 @@ namespace TeamSpartaDungeonGame.Manager
 
         public void Initialize()
         {
-            dateManager = new DateManager();
             player = new Player("test", "Programmer", 1, 10, 5, 100, 15000);
             Console.SetWindowSize(122, 52);
             Console.Title = "TeamSpartDungenGame";
@@ -56,17 +59,19 @@ namespace TeamSpartaDungeonGame.Manager
 
         public void StartGame()
         {
-            while (true)
-            {
-                Console.Clear();
-                ConsoleUtility.PrintOutline();
-                ConsoleUtility.PrintGameTitle();
-                ConsoleUtility.PrintGameHeader();
-                MainMenu();
-            }
+            this.Loop();
         }
 
-        private void MainMenu()
+
+        public void Render()
+        {
+            Console.Clear();
+            ConsoleUtility.PrintOutline();
+            ConsoleUtility.PrintGameTitle();
+            ConsoleUtility.PrintGameHeader();
+        }
+
+        public void Update()
         {
             Console.Clear();
 
@@ -80,10 +85,10 @@ namespace TeamSpartaDungeonGame.Manager
                     if (player.Name == "")
                     {
                         // 캐릭터 만드는 함수 
-                        //player
+                        //player가 만들어지면 만드는 함수
                     }
                     // 그후 로비로 가는 것 의미한다.
-                    sceneManager.GameLobby();
+                    sceneManager.SceneGameLobby();
                     break;
                 case MenuList.GameLoad:
                     Console.WriteLine();
@@ -97,6 +102,15 @@ namespace TeamSpartaDungeonGame.Manager
                     break;
                 default:
                     break;
+            }
+        }
+        
+        public void Loop()
+        {
+            while(true)
+            {
+                Render();
+                Update();
             }
         }
     }

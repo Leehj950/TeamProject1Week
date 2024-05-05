@@ -4,14 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeamSpartaDungeonGame.Interface;
+using TeamSpartaDungeonGame.Utility;
 
 namespace TeamSpartaDungeonGame.Content
 {
+    public enum LobbyList
+    {
+        PLAYSTATS = 1,
+        INVERTER,
+        SHOP,
+        RESTAREA,
+        DUNGEON,
+        SAVE,
+        TITLE,
+        EXIT
+
+    }
+
+
     internal class GameLobby : IFramework
     {
-        Dungeon dungeon;
-        RestArea restArea;
-        Shop shop;
 
         private bool IsExit;
         public GameLobby()
@@ -27,12 +39,36 @@ namespace TeamSpartaDungeonGame.Content
         // 입력을 받는 것을 주로 합니다.
         public void Update()
         {
+            int number = ConsoleUtility.PromptMenuChoice(1, 6);
 
+            switch ((LobbyList)number)
+            {
+                case LobbyList.PLAYSTATS:
+                    break;
+                case LobbyList.INVERTER:
+                    break;
+                case LobbyList.SHOP:
+                    break;
+                case LobbyList.RESTAREA:
+                    break;
+                case LobbyList.DUNGEON:
+                    break;
+                case LobbyList.SAVE:
+                    break;
+                case LobbyList.EXIT:
+                    Environment.Exit(0);
+                    break;
+                default:
+                    break;
+            }
         }
         public void Loop()
         {
-            Render();
-            Update();
+            while (IsExit)
+            {
+                Render();
+                Update();
+            }
         }
     }
 }
