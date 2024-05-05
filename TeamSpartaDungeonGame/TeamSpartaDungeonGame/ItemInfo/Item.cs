@@ -34,5 +34,9 @@ namespace TeamSpartaDungeonGame.ItemInfo
             IsEquipped = isEquipped;
             IsPurchased = isPurchased;
         }
+        public void hello()
+        {
+            Console.WriteLine();
+        }
     }
 }
