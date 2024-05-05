@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace TeamSpartaDungeonGame.PlayerInfo
 {
-    internal class Status
+    internal class Inventory
     {
-
     }
 }

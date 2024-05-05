@@ -24,9 +24,6 @@ namespace TeamSpartaDungeonGame.PlayerInfo
         public int Crit { get; set; } // 크리티컬 확률
         public int Critd { get; set; }// 크리티컬 데미지
         public int Dodge { get; set; }// 회피 확률
-
-
-
         public Stat() 
 
         {
@@ -61,4 +58,7 @@ namespace TeamSpartaDungeonGame.PlayerInfo
 
     }
 }
+
+
+
 
