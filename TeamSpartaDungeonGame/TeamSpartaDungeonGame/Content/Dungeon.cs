@@ -13,10 +13,11 @@ namespace TeamSpartaDungeonGame.Content
     public enum Difficulty
     {
         EASY = 1,
-        MEDIUM,
-        HARD,
-        BOSS,
         EXIT
+        //미구현..        
+        //         MEDIUM,
+        //         HARD,
+        //         BOSS,
     }
 
     public enum BattleList
@@ -63,7 +64,7 @@ namespace TeamSpartaDungeonGame.Content
         public void Update()
         {
             ///입력 받은 값
-            int number = ConsoleUtility.PromptMenuChoice(1, 5);
+            int number = ConsoleUtility.PromptMenuChoice(1, 2);
 
             // 스위칭 문으로 만드는 던전문
             switch ((Difficulty)number)
@@ -71,15 +72,15 @@ namespace TeamSpartaDungeonGame.Content
                 case Difficulty.EASY:
                     InDungeonLoop(Difficulty.EASY);
                     break;
-                case Difficulty.MEDIUM:
-                    InDungeonLoop(Difficulty.MEDIUM);
-                    break;
-                case Difficulty.HARD:
-                    InDungeonLoop(Difficulty.HARD);
-                    break;
-                case Difficulty.BOSS:
-                    InDungeonLoop(Difficulty.BOSS);
-                    break;
+                //case Difficulty.MEDIUM:
+                //InDungeonLoop(Difficulty.MEDIUM);
+                //break;
+                //case Difficulty.HARD:
+                //InDungeonLoop(Difficulty.HARD);
+                //break;
+                //case Difficulty.BOSS:
+                //InDungeonLoop(Difficulty.BOSS);
+                //break;
                 case Difficulty.EXIT:
                     // 이전 게임 로비로 돌아감.
                     isExit = true;
@@ -92,16 +93,13 @@ namespace TeamSpartaDungeonGame.Content
         public void Render()
         {
             Console.Clear();
+            ConsoleUtility.ShowTitle("던전 선택");
             Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("1.하급던전");
             Console.WriteLine();
-            Console.Write("2.중급던전");
-            Console.WriteLine();
-            Console.Write("3.상급던전");
-            Console.WriteLine();
-            Console.Write("4.보스방");
-            Console.WriteLine();
-            Console.Write("5.던전이탈");
+            Console.Write("2.던전이탈");
+            Console.ResetColor();
             Console.WriteLine();
         }
         public void Loop()
@@ -117,24 +115,14 @@ namespace TeamSpartaDungeonGame.Content
         void InDungeonInitalize(Difficulty difficulty)
         {
 
-            if (difficulty == Difficulty.EASY)
+            switch (difficulty)
             {
-                enemies.Add(new Enemy("미니언", 2, 15, 5, 100, 10));
-                enemies.Add(new Enemy("공허충", 3, 10, 9, 300, 20));
-                enemies.Add(new Enemy("대포미니언", 5, 25, 8, 500, 30));
-                enemyCount = enemies.Count;
-            }
-            else if (difficulty == Difficulty.MEDIUM)
-            {
-
-            }
-            else if (difficulty == Difficulty.HARD)
-            {
-
-            }
-            else if (difficulty == Difficulty.BOSS)
-            {
-
+                case Difficulty.EASY:
+                    enemies.Add(new Enemy("미니언", 2, 15, 5, 100, 10));
+                    enemies.Add(new Enemy("공허충", 3, 10, 9, 300, 20));
+                    enemies.Add(new Enemy("대포미니언", 5, 25, 8, 500, 30));
+                    enemyCount = enemies.Count;
+                    break;
             }
         }
 
@@ -152,12 +140,13 @@ namespace TeamSpartaDungeonGame.Content
         public void InDungeonRender()
         {
             Console.Clear();
-            Console.WriteLine("배틀");
+            ConsoleUtility.ShowTitle("배틀");
             Console.WriteLine("");
             for (int i = 0; i < enemies.Count; i++)
             {
                 enemies[i].PrintStat(isBattle, i);
             }
+            Console.ForegroundColor = ConsoleColor.Green;
             if (isBattle == false)
             {
                 Console.WriteLine("1.전투를 시작하겠습니까?");
@@ -169,6 +158,7 @@ namespace TeamSpartaDungeonGame.Content
                 Console.WriteLine("2.턴넘기기");
                 Console.WriteLine("3.도망치기");
             }
+            Console.ResetColor();
         }
 
         public void InDungeonUpdate()
@@ -240,7 +230,7 @@ namespace TeamSpartaDungeonGame.Content
 
             if (selet == 0 && player.Stat.Hp > 0)
             {
-                return;
+                isTarget = true;
             }
             else if (selet == 0 && player.Stat.Hp <= 0)
             {
@@ -256,7 +246,7 @@ namespace TeamSpartaDungeonGame.Content
             while (!isTarget)
             {
                 Console.Clear();
-                Console.WriteLine("배틀");
+                ConsoleUtility.ShowTitle("배틀");
                 Console.WriteLine("");
                 for (int i = 0; i < enemies.Count; i++)
                 {
@@ -264,8 +254,9 @@ namespace TeamSpartaDungeonGame.Content
                 }
 
                 Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("공격할 대상을 선택하세요.");
-
+                Console.ResetColor();
                 int selet = ConsoleUtility.PromptMenuChoice(1, enemies.Count);
 
                 if (enemies[selet - 1].Stats.Hp <= 0)
@@ -275,7 +266,7 @@ namespace TeamSpartaDungeonGame.Content
 
                 PlayerResult(enemies[selet - 1]);
             }
-
+            isTarget = false;
         }
         void PlayerResult(Enemy number)
         {
@@ -288,7 +279,9 @@ namespace TeamSpartaDungeonGame.Content
                 enemyCount--;
             }
 
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("0. 다음");
+            Console.ResetColor();
 
             int selet = ConsoleUtility.PromptMenuChoice(0, 0);
 
@@ -305,7 +298,7 @@ namespace TeamSpartaDungeonGame.Content
         void DungeonClear()
         {
             Console.Clear();
-            Console.WriteLine("Battle!! - Result");
+            ConsoleUtility.ShowTitle("Battle!! - Result");
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("Victory");
@@ -313,9 +306,16 @@ namespace TeamSpartaDungeonGame.Content
             Console.WriteLine($"던전에서 몬스터 {enemies.Count}마리를 잡았습니다.");
             Console.WriteLine($"Lv.{player.Stat.Lv} {player.Stat.Name}");
             int addMoney = GetGoldMoney();
-            Console.WriteLine($"{player.Stat.Gold} + {addMoney}");
+
+            Console.ForegroundColor =  ConsoleColor.Yellow;
+            Console.WriteLine($"골드 : {player.Stat.Gold} + {addMoney}");
+            Console.ResetColor();
+
             player.Stat.Gold += GetGoldMoney();
+
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("0. 다음");
+            Console.ResetColor();
 
             int selet = ConsoleUtility.PromptMenuChoice(0, 0);
 

@@ -37,8 +37,8 @@ namespace TeamSpartaDungeonGame.Content
         public void Render()
         {
             Console.Clear();
-            Console.WriteLine("휴식하기");
-            Console.WriteLine($"500 G 를 내면 체력을 회복할 수 있습니다. (보유 골드 : //{stat.Gold})");
+            ConsoleUtility.ShowTitle("■ 휴식처 ■");
+            Console.WriteLine($"100 G 를 내면 체력을 회복할 수 있습니다. (보유 골드 : {stat.Gold})");
 
             if (isRest)
             {
@@ -55,9 +55,14 @@ namespace TeamSpartaDungeonGame.Content
                 }
             }
 
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            Console.WriteLine();
             Console.Write("1. 휴식하기");
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("2. 나가기");
-
+            Console.ResetColor();
+            Console.WriteLine();
         }
         public void Update()
         {
@@ -79,22 +84,24 @@ namespace TeamSpartaDungeonGame.Content
 
         void Rest()
         {
-            if (stat.Gold > 500)
+            if (stat.Gold > 100)
             {
                 iscalculate = true;
-                if (stat.Hp < 100)
+                if (stat.Hp < stat.MaxHp)
                 {
                     stat.Hp += 30;
-                    if (stat.Hp > 100)
+                    if (stat.Hp > stat.MaxHp)
                     {
-                        stat.Hp = 100;
+                        stat.Hp = stat.MaxHp;
                     }
-                    stat.Gold -= 30;
+                    stat.Gold -= 100;
                 }
-                else if (stat.Hp > 100)
+                else if (stat.Hp == stat.MaxHp)
                 {
+                    Console.Clear();
                     Console.Write("휴식할 필요가 없습니다.");              // 나중에 Console.SetCursorPosition 으로 바꿀 예정
                     Console.WriteLine();
+                    Thread.Sleep(1000);
                     isRest = false;
                 }
             }

@@ -17,9 +17,9 @@ namespace TeamSpartaDungeonGame.Content
         SHOP,
         RESTAREA,
         DUNGEON,
-        SAVE,
-        TITLE,
         EXIT
+
+        //TITLE,
     }
 
 
@@ -36,7 +36,8 @@ namespace TeamSpartaDungeonGame.Content
         public void Render()
         {
             Console.Clear();
-            //ConsoleUtility.PrintOutline();
+            ConsoleUtility.ShowTitle("■ 게임로비 ■");
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine();
             Console.Write("1.플레이어 스탯창");
             Console.WriteLine();
@@ -48,10 +49,9 @@ namespace TeamSpartaDungeonGame.Content
             Console.WriteLine();
             Console.Write("5. 던전");
             Console.WriteLine();
-            Console.Write("6. 저장하기");
+            Console.Write("6. 게임종료");
             Console.WriteLine();
-            Console.Write("7. 게임종료");
-            Console.WriteLine();
+            Console.ResetColor();
         }
         //업데이트는 입력및 계산을 주로 업데이트에서 하고
         // 입력을 받는 것을 주로 합니다.
@@ -75,9 +75,6 @@ namespace TeamSpartaDungeonGame.Content
                     break;
                 case LobbyList.DUNGEON:
                     SceneManager.Instance().SceneDungeon();
-                    break;
-                case LobbyList.SAVE:
-                    DateManager.Instance().SaveDate();
                     break;
                 case LobbyList.EXIT:
                     Environment.Exit(0);
