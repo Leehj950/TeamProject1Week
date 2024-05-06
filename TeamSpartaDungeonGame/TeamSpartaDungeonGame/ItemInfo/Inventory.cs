@@ -13,11 +13,32 @@ namespace TeamSpartaDungeonGame.ItemInfo
         private int max = Pagecount;
         private int min = 0;
         const int Pagecount = 9;
+        private bool IsExit = false;
 
         private List<Item> inventory;
         
+        public void Update()
+        {
+            switch (ConsoleUtility.PromptMenuChoice(0, 3))
+            {
+                case 0:
+                    //MainMenu();
+                    break;
+                case 1:
+                    EquipMenuLoop();
+                    break;
+                case 2:
+                    InvenNextPage();
+                    Loop();
+                    break;
+                case 3:
+                    InvenPreviousPage();
+                    Loop();
+                    break;
+            }
+        }
 
-        private void InventoryMenu()
+        public void Render()
         {
             Console.Clear();
 
@@ -37,27 +58,34 @@ namespace TeamSpartaDungeonGame.ItemInfo
             Console.WriteLine("3. 이전 페이지");
             Console.WriteLine("0. 나가기");
             Console.WriteLine("");
+        }
 
-            switch (ConsoleUtility.PromptMenuChoice(0, 3))
+        public void Loop()
+        {
+            while (!IsExit)
+            {
+                Render();
+                Update();
+            }
+        }
+
+        public void EquipMenuUpdate()
+        {
+            int KeyInput = ConsoleUtility.PromptMenuChoice(0, inventory.Count);
+
+            switch (KeyInput)
             {
                 case 0:
-                    //MainMenu();
+                    Loop();
                     break;
-                case 1:
-                    EquipMenu();
-                    break;
-                case 2:
-                    InvenNextPage();
-                    InventoryMenu();
-                    break;
-                case 3:
-                    InvenPreviousPage();
-                    InventoryMenu();
+                default:
+                    inventory[KeyInput - 1].ToggleEquipStatus();
+                    EquipMenuLoop();
                     break;
             }
         }
 
-        private void EquipMenu()
+        public void EquipMenuRender()
         {
             Console.Clear();
 
@@ -72,18 +100,13 @@ namespace TeamSpartaDungeonGame.ItemInfo
             }//나가기 0번고정, 나머지가 1번부터 배정
             Console.WriteLine("");
             Console.WriteLine("0. 나가기");
-
-            int KeyInput = ConsoleUtility.PromptMenuChoice(0, inventory.Count);
-
-            switch (KeyInput)
+        }
+        public void EquipMenuLoop()
+        {
+            while (!IsExit)
             {
-                case 0:
-                    InventoryMenu();
-                    break;
-                default:
-                    inventory[KeyInput - 1].ToggleEquipStatus();
-                    EquipMenu();
-                    break;
+                EquipMenuRender();
+                EquipMenuUpdate();
             }
         }
 
