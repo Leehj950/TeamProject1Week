@@ -16,7 +16,7 @@ namespace TeamSpartaDungeonGame.Manager
 
         private static  SceneManager instance;
 
-        private static SceneManager instance;
+        
 
         private GameLobby gameLobby;
         private Dungeon dungeon;

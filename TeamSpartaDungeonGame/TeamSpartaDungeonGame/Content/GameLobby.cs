@@ -49,7 +49,6 @@ namespace TeamSpartaDungeonGame.Content
             switch ((LobbyList)number)
             {
                 case LobbyList.PLAYSTATS:
-                    player.StatusMenu();
                     break;
                 case LobbyList.INVERTER:
                     break;
