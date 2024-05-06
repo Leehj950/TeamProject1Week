@@ -23,6 +23,7 @@ namespace TeamSpartaDungeonGame.Utility
             }
         }
 
+<<<<<<< Updated upstream
         internal static void ShowTitle(string title) //이렇게 하면 매개변수로 들어온 ■ 상태보기 ■ 가 마제타 색깔이 된다.
         {
             Console.ForegroundColor = ConsoleColor.Magenta;// 색깔 마제타로 입히기
@@ -41,6 +42,8 @@ namespace TeamSpartaDungeonGame.Utility
 
         }
 
+=======
+>>>>>>> Stashed changes
         public static int GetPrintableLength(string str)
         {
             int length = 0;
