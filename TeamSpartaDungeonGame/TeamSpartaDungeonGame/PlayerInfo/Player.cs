@@ -88,8 +88,8 @@ namespace TeamSpartaDungeonGame.PlayerInfo
             criticalDmg = (float)(stat.Critd * 0.01);
 
             critProb = new Random().Next(1, 100);
-            finalDmg = new Random().Next((int)(stat.Atk * 0.9), (int)(stat.Atk * 1.1));
-            if (critProb <= stat.Crit)
+            finalDmg = new Random().Next((int)((stat.Atk + stat.bonusAtk) * 0.9), (int)((stat.Atk + stat.bonusAtk) * 1.1));
+            if (critProb <= stat.Crit + stat.bonusCrit)
             {
                 Console.WriteLine("운좋게 치명타 발생 ! ! ");
                 finalDmg *= criticalDmg;
@@ -108,7 +108,7 @@ namespace TeamSpartaDungeonGame.PlayerInfo
 
             //takeDmg = enemyStats.Atk;// 몬스터의 데미지가 구현되면 바꿀 예정
             dodgeProb = new Random().Next(1, 100);
-            if (dodgeProb <= stat.Dodge)
+            if (dodgeProb <= stat.Dodge + stat.bonusDodge)
             {
                 Console.WriteLine("어찌어찌 피했다!");
                 takeDmg = 0; // 받는 데미지가 0이 된다
