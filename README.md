@@ -1,6 +1,7 @@
 # 십색조 TeamSpartaDungeonGame 프로젝트
 
-##UML
+## UML
+
 |![UML](https://github.com/Leehj950/TeamProject1Week/blob/main/UML.jpg)|
 
 ## 팀원
