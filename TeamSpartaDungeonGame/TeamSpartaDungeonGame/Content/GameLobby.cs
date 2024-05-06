@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeamSpartaDungeonGame.Interface;
+using TeamSpartaDungeonGame.PlayerInfo;
 using TeamSpartaDungeonGame.Utility;
 
 namespace TeamSpartaDungeonGame.Content
@@ -25,9 +26,13 @@ namespace TeamSpartaDungeonGame.Content
     internal class GameLobby : IFramework
     {
 
+        private Player player;
+        private RestArea restArea;
         private bool IsExit;
-        public GameLobby()
+        public GameLobby(Player player)
         {
+            this.player = player;
+            restArea = new RestArea(player.Stat);
 
         }
         // 렌더러는 거기서 그림을 출력하는 함수.
@@ -44,6 +49,7 @@ namespace TeamSpartaDungeonGame.Content
             switch ((LobbyList)number)
             {
                 case LobbyList.PLAYSTATS:
+                    player.StatusMenu();
                     break;
                 case LobbyList.INVERTER:
                     break;

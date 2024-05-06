@@ -9,12 +9,9 @@ namespace TeamSpartaDungeonGame.PlayerInfo
 {
     public class Stat
     {
-
-
-
         Player player;
 
-        string Name { get; set; }    // 사용자 이름
+        public string Name { get; set; }    // 사용자 이름
         public int Lv { get; set; }  // 레  벨
         public int Atk { get; set; } // 공격력
         public int Def { get; set; } // 방어력

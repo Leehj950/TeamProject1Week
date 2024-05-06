@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeamSpartaDungeonGame.Interface;
+using TeamSpartaDungeonGame.ItemInfo;
+using TeamSpartaDungeonGame.PlayerInfo;
 
 namespace TeamSpartaDungeonGame.Content
 {
@@ -12,8 +14,18 @@ namespace TeamSpartaDungeonGame.Content
 
 <<<<<<< Updated upstream
         private bool IsExit;
-        public Shop() { }
+        private Player player;
+        private List<Item> Shoplist;
 
+        public Shop(Player player) 
+        {
+            this.player = player;
+        }
+
+        public void Initalize(Player value) 
+        {
+
+        }
 
         public void Update()
         {
