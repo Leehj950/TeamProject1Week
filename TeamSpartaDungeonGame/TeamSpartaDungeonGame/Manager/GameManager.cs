@@ -63,9 +63,9 @@ namespace TeamSpartaDungeonGame.Manager
         public void Update()
         {
             //int choice = PromptMenuChoice(1, 3);
-            int choice = ConsoleUtility.PromptMenuChoice(1, 3, 48, 40);
+           ConsoleUtility.PromptMenuChoice(1, 3, 48, 40);
 
-            switch ((MenuList)choice)
+            switch ((MenuList)ConsoleUtility.PromptMenuChoice(1, 3, 48, 40))
             {
                 case MenuList.GAMESTART:
                     Console.WriteLine();

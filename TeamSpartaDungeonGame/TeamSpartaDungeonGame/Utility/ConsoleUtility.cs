@@ -25,6 +25,11 @@ namespace TeamSpartaDungeonGame.Utility
                 {
                     return choice;
                 }
+                else
+                {
+                    Console.SetCursorPosition(x, y-1);
+                    Console.WriteLine("잘못입력한 값입니다.");
+                }
             }
         }
 
@@ -32,11 +37,14 @@ namespace TeamSpartaDungeonGame.Utility
         {
             while(true) 
             {
-               
                 Console.WriteLine("원하시는 번호를 입력해주세요.");
                 if(int.TryParse(Console.ReadLine(), out int choice) && choice >=min && choice <= max) 
                 {
                     return choice; 
+                }
+                else
+                {
+                    Console.WriteLine("잘못입력한 값입니다.");
                 }
             }
         }

@@ -36,7 +36,7 @@ namespace TeamSpartaDungeonGame.Content
         public void Render()
         {
             Console.Clear();
-            ConsoleUtility.PrintOutline();
+            //ConsoleUtility.PrintOutline();
             Console.WriteLine();
             Console.Write("1.플레이어 스탯창");
             Console.WriteLine();
@@ -62,9 +62,10 @@ namespace TeamSpartaDungeonGame.Content
             switch ((LobbyList)number)
             {
                 case LobbyList.PLAYSTATS:
-                    player.StatusMenu();
+                    SceneManager.Instance().ScenePlayerStats();
                     break;
                 case LobbyList.INVERTER:
+                    SceneManager.Instance().SceneInventory();
                     break;
                 case LobbyList.SHOP:
                     SceneManager.Instance().SceneShop();

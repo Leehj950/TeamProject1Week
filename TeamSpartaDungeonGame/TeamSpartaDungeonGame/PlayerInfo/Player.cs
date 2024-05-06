@@ -18,6 +18,8 @@ namespace TeamSpartaDungeonGame.PlayerInfo
     internal class Player : IAction
     {
         Stat stat;
+        bool isExit;
+
         public Stat Stat { get; }
         public Player()
         {
@@ -38,11 +40,35 @@ namespace TeamSpartaDungeonGame.PlayerInfo
         }
 
 
-        public void StatusMenu()
+        public void StatLoop()
         {
             // 캐릭터 상태창
+            while (!isExit)
+            {
+                Render();
+                Update();
+            }
+        }
+
+        void Update()
+        {
+            switch (ConsoleUtility.PromptMenuChoice(0, 0))
+            {
+                case 0:
+                    isExit = true;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        void Render()
+        {
+            Console.Clear();
+            ConsoleUtility.PrintOutline();
             stat.PlayerStatus();
         }
+
         public float Critical() // 크리티컬 배수 1.6을 곱해주기 위해서 float 자료형 사용
         {
             float finalDmg;    // 최종 데미지

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TeamSpartaDungeonGame.PlayerInfo;
 using TeamSpartaDungeonGame.Utility;
 
 namespace TeamSpartaDungeonGame.Content
@@ -23,13 +24,17 @@ namespace TeamSpartaDungeonGame.Content
         /// </summary>
         private bool isExit = false;
         private bool isDungeonExit = false;
+        private Player player;
         private bool isEasy;
         private bool isMedium;
         private bool isHard;
         /// <summary>
         /// 생성자
         /// </summary>
-        public Dungeon() { }
+        public Dungeon( Player player) 
+        {
+            this.player = player;
+        }
 
         /// <summary>
         /// 함수
@@ -104,7 +109,7 @@ namespace TeamSpartaDungeonGame.Content
 
         public void InDungeonUpdate(Difficulty value)
         {
-
+            int number = ConsoleUtility.PromptMenuChoice(1, 3);
         }
     }
 }
