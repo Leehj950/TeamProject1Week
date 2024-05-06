@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TeamSpartaDungeonGame.ItemInfo;
 using TeamSpartaDungeonGame.Manager;
 using TeamSpartaDungeonGame.Utility;
 
-namespace TeamSpartaDungeonGame.ItemInfo
+namespace TeamSpartaDungeonGame.PlayerInfo
 {
     internal class Inventory
     {

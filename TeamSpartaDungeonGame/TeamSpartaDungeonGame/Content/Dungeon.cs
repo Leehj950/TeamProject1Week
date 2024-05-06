@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TeamSpartaDungeonGame.EnemyInfo;
 using TeamSpartaDungeonGame.PlayerInfo;
 using TeamSpartaDungeonGame.Utility;
 
@@ -35,6 +36,8 @@ namespace TeamSpartaDungeonGame.Content
         {
             this.player = player;
         }
+        
+        List <Enemy> enemies = new List <Enemy>();
 
         /// <summary>
         /// 함수
@@ -92,14 +95,37 @@ namespace TeamSpartaDungeonGame.Content
             }
         }
 
+        void Initalize(Difficulty difficulty)
+        {
+            
+            if(difficulty == Difficulty.Easy) 
+            {
+            
+            }
+            else if(difficulty == Difficulty.Medium)
+            {
+
+            }
+            else if( difficulty == Difficulty.Hard)
+            {
+
+            }
+            else if (difficulty == Difficulty.Boss) 
+            {
+            
+            }
+        }
+
         public void InDungeonLoop(Difficulty value)
         {
             Difficulty select = value;
+            Initalize(select);
             while (!isDungeonExit)
             {
                 InDungeonRender(select);
                 InDungeonUpdate(select);
             }
+            Reset();
         }
 
         public void InDungeonRender(Difficulty value)
@@ -109,7 +135,12 @@ namespace TeamSpartaDungeonGame.Content
 
         public void InDungeonUpdate(Difficulty value)
         {
-            int number = ConsoleUtility.PromptMenuChoice(1, 3);
+           
+        }
+
+        void Reset()
+        {
+            enemies.Clear();
         }
     }
 }

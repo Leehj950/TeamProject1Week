@@ -13,6 +13,8 @@ namespace TeamSpartaDungeonGame.EnemyInfo
     internal class Enemy : IAction
     {
         EnemyStats stats;
+        public EnemyStats Stats { get { return stats; } } 
+
         bool isDead;
         Player player;
 

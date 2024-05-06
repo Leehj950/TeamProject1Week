@@ -61,12 +61,12 @@ namespace TeamSpartaDungeonGame.Manager
 
         public void ScenePlayerStats( )
         {
-            player.StatLoop();
+
         }
 
         public void SceneInventory()
         {
-            Inventory
+
         }
     }
 }
