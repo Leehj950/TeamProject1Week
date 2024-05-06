@@ -31,9 +31,11 @@ namespace TeamSpartaDungeonGame.ItemInfo
         //장착유무는 이클래스에서만 정의
         public bool IsPurchased { get; private set; }
         //구매유무는 이클래에서만 정의
+        public bool IsSelled { get; private set; }
 
 
-        public Item(string name, string desc, ItemType type, int atk, int def, int hp, int price, float crit,  float dodge, bool isEquipped = false, bool isPurchased = false)
+
+        public Item(string name, string desc, ItemType type, int atk, int def, int hp, int mp, int price, float crit,  float dodge, bool isEquipped = false, bool isPurchased = false, bool isSelled = false)
         {
             Name = name;
             Desc = desc;
@@ -41,11 +43,14 @@ namespace TeamSpartaDungeonGame.ItemInfo
             Atk = atk;
             Def = def;
             Hp = hp;
+            Mp = mp;
             Price = price;
             Crit = crit;
             Dodge = dodge;
             IsEquipped = isEquipped;
             IsPurchased = isPurchased;
+            IsSelled = isSelled;
+
         }
 
         internal void PrintItemStatDesciption(bool withNumber = false, int idx = 0)
@@ -71,7 +76,8 @@ namespace TeamSpartaDungeonGame.ItemInfo
 
             Console.Write(" | ");
 
-            if (Atk != 0) Console.Write($"공격력{(Atk >= 0 ? "+" : "")}{Atk}             ");
+            if (Atk != 0) Console.Write($"공격력 {(Atk >= 0 ? "+" : "")}{Atk} ");
+            if (Mp != 0) Console.Write($"마  나 {(Mp >= 0 ? "+" : "")}{Mp} ");
             if (Def != 0) Console.Write($"방어력 {(Def >= 0 ? "+" : "")}{Def} ");
             if (Hp != 0) Console.Write($"체  력 {(Hp >= 0 ? "+" : "")}{Hp} ");
             if (Crit != 0) Console.Write($"치명타률 {(Crit >= 0 ? "+" : "")}{Crit} ");
@@ -96,7 +102,8 @@ namespace TeamSpartaDungeonGame.ItemInfo
 
             Console.Write(" | ");
 
-            if (Atk != 0) Console.Write($"공격력{(Atk >= 0 ? "+" : "")}{Atk}             ");
+            if (Atk != 0) Console.Write($"공격력 {(Atk >= 0 ? "+" : "")}{Atk} ");
+            if (Mp != 0) Console.Write($"마  나 {(Mp >= 0 ? "+" : "")}{Mp} ");
             if (Def != 0) Console.Write($"방어력 {(Def >= 0 ? "+" : "")}{Def} ");
             if (Hp != 0) Console.Write($"체  력 {(Hp >= 0 ? "+" : "")}{Hp} ");
             if (Crit != 0) Console.Write($"치명타률 {(Crit >= 0 ? "+" : "")}{Crit} ");
@@ -117,6 +124,38 @@ namespace TeamSpartaDungeonGame.ItemInfo
             }
         }
 
+        internal void PrintStoreSellItemStatDesciption(bool withNumber = false, int idx = 0)
+        {
+            Console.Write("- ");
+            if (withNumber)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.Write($"{idx} ");
+                Console.ResetColor();
+            }
+            Console.Write(ConsoleUtility.PadRightForMixedText(Name, 15));
+
+            Console.Write(" | ");
+
+            if (Atk != 0) Console.Write($"공격력 {(Atk >= 0 ? "+" : "")}{Atk} ");
+            if (Mp != 0) Console.Write($"마  나 {(Mp >= 0 ? "+" : "")}{Mp} ");
+            if (Def != 0) Console.Write($"방어력 {(Def >= 0 ? "+" : "")}{Def} ");
+            if (Hp != 0) Console.Write($"체  력 {(Hp >= 0 ? "+" : "")}{Hp} ");
+            if (Crit != 0) Console.Write($"치명타률 {(Crit >= 0 ? "+" : "")}{Crit} ");
+            if (Dodge != 0) Console.Write($"회피률 {(Dodge >= 0 ? "+" : "")}{Dodge} ");
+
+
+            Console.Write(" | ");
+
+            Console.Write(ConsoleUtility.PadRightForMixedText(Desc, 25));
+
+            Console.Write(" | ");
+
+
+            ConsoleUtility.PrintTextHighlights("", Price.ToString(), " G");
+
+        }
+
         internal void ToggleEquipStatus()
         {
             IsEquipped = !IsEquipped;
@@ -127,5 +166,10 @@ namespace TeamSpartaDungeonGame.ItemInfo
             IsPurchased = true; //아이템 팔기 구현할려면 IsPurchased를 false로  
         }
 
+        internal void Selled()
+        {
+            IsSelled = true;
+            IsPurchased = false;
+        }
     }
 }
