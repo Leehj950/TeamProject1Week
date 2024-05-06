@@ -42,7 +42,7 @@ namespace TeamSpartaDungeonGame.PlayerInfo
             switch (ConsoleUtility.PromptMenuChoice(0, 3))
             {
                 case 0:
-                    MainMenu();
+                    //MainMenu();
                     break;
                 case 1:
                     EquipMenu();

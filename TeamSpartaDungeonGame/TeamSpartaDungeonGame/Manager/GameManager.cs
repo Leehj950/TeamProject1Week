@@ -62,18 +62,16 @@ namespace TeamSpartaDungeonGame.Manager
 
         public void Update()
         {
-            //int choice = PromptMenuChoice(1, 3);
-           ConsoleUtility.PromptMenuChoice(1, 3, 48, 40);
+           
 
             switch ((MenuList)ConsoleUtility.PromptMenuChoice(1, 3, 48, 40))
             {
                 case MenuList.GAMESTART:
                     Console.WriteLine();
-                    //if (Name == "")
-                    //{
-                    //    // 캐릭터 만드는 함수 
-                    //    //player가 만들어지면 만드는 함수
-                    //}
+                    if(player.Stat.Name == " ")
+                    {
+                        player.CreatePlayer();
+                    }
                     // 그후 로비로 가는 것 의미한다.
                     sceneManager.SceneGameLobby();
                     break;
