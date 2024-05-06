@@ -17,12 +17,12 @@ namespace TeamSpartaDungeonGame.Manager
         private RestArea restArea;
         private Shop shop;
         private Player player;
-        private Inventory inventory;
 
         public void initalize(Player player)
         {
             this.player = player;
             shop = new Shop(player);
+            shop.InitalizeShop();
             gameLobby = new GameLobby(player);
             restArea = new RestArea(player.Stat);
             dungeon = new Dungeon(player);
@@ -66,7 +66,7 @@ namespace TeamSpartaDungeonGame.Manager
 
         public void SceneInventory()
         {
-
+            player.Invern.Loop();
         }
     }
 }

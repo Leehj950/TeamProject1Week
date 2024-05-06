@@ -19,15 +19,14 @@ namespace TeamSpartaDungeonGame.PlayerInfo
 
     internal class Player : IAction
     {
-        EnemyStats enemyStats;
-        SceneManager sceneManager;
         Stat stat;
-        Enemy enemy;
-
+        Inventory inventory;
+        public Inventory Invern { get { return inventory; } }
         public Stat Stat { get { return stat; } }
         public Player()
         {
             stat = new Stat();
+            inventory = new Inventory();
         }
 
         bool isExit;
@@ -115,7 +114,7 @@ namespace TeamSpartaDungeonGame.PlayerInfo
             int dodgeProb;
             int takeDmg; // 받는 데미지
 
-            takeDmg = enemyStats.Atk;// 몬스터의 데미지가 구현되면 바꿀 예정
+            //takeDmg = enemyStats.Atk;// 몬스터의 데미지가 구현되면 바꿀 예정
             dodgeProb = new Random().Next(1, 100);
             if (dodgeProb <= stat.Dodge)
             {
@@ -134,7 +133,7 @@ namespace TeamSpartaDungeonGame.PlayerInfo
             Console.WriteLine("직업선택");
 
             Console.WriteLine("프로그래머 : Atk : -5 , Hp : -50 , Mp : +100");
-            Console.WriteLine("거지 : Atk : +30 , Def : +5 , Dodge : +15");
+            Console.WriteLine("거지 : Hp : +30 , Def : +5 , Dodge : +15");
             Console.WriteLine("가수 : Atk : +5 , Crit : +20 , Critd -= 10");
             Console.WriteLine("부자 : Hp : -50 , Mp : -50, Def : -5 Atk : -5, Gold : +10000 ");
             Console.WriteLine("1. 프로그래머\n2. 거지\n3. 가수\n4. 부자\n");

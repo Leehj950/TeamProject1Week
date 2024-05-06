@@ -14,18 +14,20 @@ namespace TeamSpartaDungeonGame.Content
     {
 
 
-        private bool IsExit = false;
+        private bool isExit = false;
         private Player player;
         private List<Item> storeInventory;
-        private List<Item> inventory;
+        //private List<Item> inventory;
+        private Inventory inventory;
         private int max = Pagecount;
         private int min = 0;
         const int Pagecount = 9;
 
 
-        public Shop(Player player) 
+        public Shop(Player player)
         {
             this.player = player;
+            inventory = player.Invern;
         }
         public void InitalizeShop()
         {
@@ -49,25 +51,23 @@ namespace TeamSpartaDungeonGame.Content
             switch (ConsoleUtility.PromptMenuChoice(0, 4))
             {
                 case 0:
-                    //MainMenu();
+                    isExit = true;
                     break;
                 case 1:
                     PurchaseMenuLoop();
                     break;
                 case 2:
                     NextPage();
-                    Render();
                     break;
                 case 3:
                     PreviousPage();
-                    Render();
                     break;
                 case 4:
                     SellMenuLoop();
                     break;
             }
         }
-        
+
         public void Render()
         {
             Console.Clear();
@@ -94,12 +94,12 @@ namespace TeamSpartaDungeonGame.Content
 
         public void Loop()
         {
-            while(!IsExit)
+            while (!isExit)
             {
                 Render();
                 Update();
             }
-
+            isExit = false;
         }
 
         public void PurchaseMenuUpdate()
@@ -122,7 +122,7 @@ namespace TeamSpartaDungeonGame.Content
                     {
                         player.Stat.Gold -= storeInventory[keyInput - 1].Price;
                         storeInventory[keyInput - 1].Purchased();
-                        inventory.Add(storeInventory[keyInput - 1]);
+                        inventory.Invent.Add(storeInventory[keyInput - 1]);
                         PurchaseMenuLoop();
                     }
                     //3 : 돈이 모자라는 경우
@@ -165,7 +165,7 @@ namespace TeamSpartaDungeonGame.Content
 
         public void PurchaseMenuLoop()
         {
-            while (!IsExit)
+            while (!isExit)
             {
                 PurchaseMenuRender();
                 PurchaseMenuUpdate();
@@ -174,7 +174,7 @@ namespace TeamSpartaDungeonGame.Content
 
         public void SellMenuUpdate()
         {
-            int keyInput = ConsoleUtility.PromptMenuChoice(0, inventory.Count);
+            int keyInput = ConsoleUtility.PromptMenuChoice(0, inventory.Invent.Count);
 
             switch (keyInput)
             {
@@ -183,9 +183,9 @@ namespace TeamSpartaDungeonGame.Content
                     break;
                 default:
                     // : 판매할 수 있는 경우
-                    player.Stat.Gold += inventory[keyInput - 1].Price;
-                    inventory[keyInput - 1].Selled();
-                    inventory.Remove(inventory[keyInput - 1]);
+                    player.Stat.Gold += inventory.Invent[keyInput - 1].Price;
+                    inventory.Invent[keyInput - 1].Selled();
+                    inventory.Invent.Remove(inventory.Invent[keyInput - 1]);
                     SellMenuLoop();
                     break;
             }
@@ -202,9 +202,12 @@ namespace TeamSpartaDungeonGame.Content
             ConsoleUtility.PrintTextHighlights("", player.Stat.Gold.ToString(), "G");
             Console.WriteLine("");
             Console.WriteLine("[아이템 목록]");
-            for (int i = 0; i < inventory.Count; i++)
+            if (inventory.Invent.Count != 0)
             {
-                inventory[i].PrintStoreSellItemStatDesciption(true, i + 1);
+                for (int i = 0; i < inventory.Invent.Count; i++)
+                {
+                    inventory.Invent[i].PrintStoreSellItemStatDesciption(true, i + 1);
+                }
             }
             Console.WriteLine("");
             Console.WriteLine("0. 나가기");
@@ -213,7 +216,7 @@ namespace TeamSpartaDungeonGame.Content
 
         public void SellMenuLoop()
         {
-            while (!IsExit)
+            while (!isExit)
             {
                 SellMenuRender();
                 SellMenuUpdate();
@@ -251,7 +254,7 @@ namespace TeamSpartaDungeonGame.Content
                 min = 0;
             }
         }
-        
+
 
     }
 }
