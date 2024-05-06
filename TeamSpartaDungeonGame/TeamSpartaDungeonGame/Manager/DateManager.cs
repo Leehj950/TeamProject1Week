@@ -32,7 +32,7 @@ namespace TeamSpartaDungeonGame.Manager
 
         }
 
-        public void SaveDate(Player player, Shop shop)
+        public void SaveDate()
         {
 
         }

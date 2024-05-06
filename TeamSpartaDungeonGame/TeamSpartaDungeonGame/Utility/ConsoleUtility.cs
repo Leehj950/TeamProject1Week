@@ -20,9 +20,15 @@ namespace TeamSpartaDungeonGame.Utility
             {
                 Console.SetCursorPosition(x, y);
                 Console.WriteLine("원하시는 번호를 입력해주세요.");
+                Console.SetCursorPosition(x, y+1);    
                 if (int.TryParse(Console.ReadLine(), out int choice) && choice >= min && choice <= max)
                 {
                     return choice;
+                }
+                else
+                {
+                    Console.SetCursorPosition(x, y-1);
+                    Console.WriteLine("잘못입력한 값입니다.");
                 }
             }
         }
@@ -36,10 +42,12 @@ namespace TeamSpartaDungeonGame.Utility
                 {
                     return choice; 
                 }
+                else
+                {
+                    Console.WriteLine("잘못입력한 값입니다.");
+                }
             }
         }
-
-<<<<<<< Updated upstream
         internal static void ShowTitle(string title) //이렇게 하면 매개변수로 들어온 ■ 상태보기 ■ 가 마제타 색깔이 된다.
         {
             Console.ForegroundColor = ConsoleColor.Magenta;// 색깔 마제타로 입히기
@@ -58,8 +66,6 @@ namespace TeamSpartaDungeonGame.Utility
 
         }
 
-=======
->>>>>>> Stashed changes
         public static int GetPrintableLength(string str)
         {
             int length = 0;

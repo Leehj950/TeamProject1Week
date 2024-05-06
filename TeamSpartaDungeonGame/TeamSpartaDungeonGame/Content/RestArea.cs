@@ -12,7 +12,7 @@ namespace TeamSpartaDungeonGame.Content
 {
     public enum MenuList
     {
-        REST,
+        REST = 1,
         EXIT
     }
     internal class RestArea : IFramework
@@ -36,8 +36,9 @@ namespace TeamSpartaDungeonGame.Content
 
         public void Render()
         {
+            Console.Clear();
             Console.WriteLine("휴식하기");
-            Console.WriteLine($"500 G 를 내면 체력을 회복할 수 있습니다. (보유 골드 : {stat.Gold})");
+            Console.WriteLine($"500 G 를 내면 체력을 회복할 수 있습니다. (보유 골드 : //{stat.Gold})");
 
             if (isRest)
             {
@@ -102,8 +103,6 @@ namespace TeamSpartaDungeonGame.Content
                 iscalculate = false;
             }
         }
-
-
 
         public void Loop()
         {
