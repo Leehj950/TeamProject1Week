@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TeamSpartaDungeonGame.EnemyInfo;
+using TeamSpartaDungeonGame.PlayerInfo;
 using TeamSpartaDungeonGame.Utility;
 
 namespace TeamSpartaDungeonGame.Content
@@ -23,10 +25,19 @@ namespace TeamSpartaDungeonGame.Content
         /// </summary>
         private bool isExit = false;
         private bool isDungeonExit = false;
+        private Player player;
+        private bool isEasy;
+        private bool isMedium;
+        private bool isHard;
         /// <summary>
         /// 생성자
         /// </summary>
-        public Dungeon() { }
+        public Dungeon( Player player) 
+        {
+            this.player = player;
+        }
+        
+        List <Enemy> enemies = new List <Enemy>();
 
         /// <summary>
         /// 함수
@@ -40,15 +51,16 @@ namespace TeamSpartaDungeonGame.Content
             switch ((Difficulty)number)
             {
                 case Difficulty.Easy:
-
+                    InDungeonLoop(Difficulty.Easy);
                     break;
                 case Difficulty.Medium:
+                    InDungeonLoop(Difficulty.Medium);
                     break;
                 case Difficulty.Hard:
-
+                    InDungeonLoop(Difficulty.Hard);
                     break;
                 case Difficulty.Boss:
-                    //if()
+                    InDungeonLoop(Difficulty.Boss);
                     break;
                 case Difficulty.Exit:
                     // 이전 게임 로비로 돌아감.
@@ -61,7 +73,18 @@ namespace TeamSpartaDungeonGame.Content
 
         public void Render()
         {
-            //나중에 그리거나 글씨를 출력을 여기서모아서 출력하기.
+            Console.Clear();
+            Console.WriteLine();
+            Console.Write("1.하급던전");
+            Console.WriteLine();
+            Console.Write("2.중급던전");
+            Console.WriteLine();
+            Console.Write("3.상급던전");
+            Console.WriteLine();
+            Console.Write("4.보스방");
+            Console.WriteLine();
+            Console.Write("5.던전이탈");
+            Console.WriteLine();
         }
         public void Loop()
         {
@@ -72,24 +95,52 @@ namespace TeamSpartaDungeonGame.Content
             }
         }
 
-        public void DungeonLoop(Difficulty value)
+        void Initalize(Difficulty difficulty)
         {
-            Difficulty select = value;
-            while (!isDungeonExit)
+            
+            if(difficulty == Difficulty.Easy) 
             {
-                DungeonRender(select);
-                DungeonUpdate(select);
+            
+            }
+            else if(difficulty == Difficulty.Medium)
+            {
+
+            }
+            else if( difficulty == Difficulty.Hard)
+            {
+
+            }
+            else if (difficulty == Difficulty.Boss) 
+            {
+            
             }
         }
 
-        public void DungeonRender(Difficulty value)
+        public void InDungeonLoop(Difficulty value)
+        {
+            Difficulty select = value;
+            Initalize(select);
+            while (!isDungeonExit)
+            {
+                InDungeonRender(select);
+                InDungeonUpdate(select);
+            }
+            Reset();
+        }
+
+        public void InDungeonRender(Difficulty value)
         {
 
         }
 
-        public void DungeonUpdate(Difficulty value)
+        public void InDungeonUpdate(Difficulty value)
         {
+           
+        }
 
+        void Reset()
+        {
+            enemies.Clear();
         }
     }
 }

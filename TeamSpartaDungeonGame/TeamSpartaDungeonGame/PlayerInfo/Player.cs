@@ -1,5 +1,7 @@
 ﻿using TeamSpartaDungeonGame.Interface;
 using TeamSpartaDungeonGame.Utility;
+using TeamSpartaDungeonGame.Manager;
+using TeamSpartaDungeonGame.EnemyInfo;
 
 
 
@@ -17,17 +19,24 @@ namespace TeamSpartaDungeonGame.PlayerInfo
 
     internal class Player : IAction
     {
+        EnemyStats enemyStats;
+        SceneManager sceneManager;
         Stat stat;
+        Enemy enemy;
+
+        public string name;
         public Stat Stat { get; }
         public Player()
         {
             stat = new Stat();
         }
 
-        public void Attack() // 수정 많이 해야할듯?
+        bool isExit;
+
+        public void Select() // 수정 많이 해야할듯?
         {
             Console.WriteLine("공격할 몬스터를 선택해주세요\n");
-            Console.WriteLine("1. {0} \n 2. {1} \n 3. {2} \n", Monster); // 몬스터가 구현되면 바꿀 예정
+            Console.WriteLine("1. {0} \n 2. {1} \n 3. {2} \n", 0); // 몬스터가 구현되면 바꿀 예정
             Console.Write(" >> ");
             int playerChoice = ConsoleUtility.PromptMenuChoice(1, 3);
 
@@ -36,11 +45,45 @@ namespace TeamSpartaDungeonGame.PlayerInfo
 
             }
         }
+        public void Attack1(EnemyHp)
+        {
+            Console.WriteLine("공격이 제대로 들어갔다 ! 해치웠나?");
+            EnemyHp -= stat.Atk;
+        }
 
+        public void Attack() 
+        {
 
-        public void StatusMenu()
+        }
+        public void ExpGet(int exp)
+        {
+            stat.Exp += exp;
+        }
+
+        public void StatLoop()
         {
             // 캐릭터 상태창
+            while(isExit)
+            {
+                Render();
+                Update();
+            }
+        }
+
+        void Update()
+        {
+           
+            switch (ConsoleUtility.PromptMenuChoice(0, 0))
+            {
+                case 0:
+                    isExit = true;
+                    break;
+                default:
+                    break;
+            }
+        }
+        void Render()
+        {
             stat.PlayerStatus();
         }
         public float Critical() // 크리티컬 배수 1.6을 곱해주기 위해서 float 자료형 사용
@@ -54,7 +97,7 @@ namespace TeamSpartaDungeonGame.PlayerInfo
             finalDmg = new Random().Next((int)(stat.Atk * 0.9), (int)(stat.Atk * 1.1));
             if (critProb <= stat.Crit)
             {
-                Console.WriteLine("운좋게 치명타 발생");
+                Console.WriteLine("운좋게 치명타 발생 ! ! ");
                 finalDmg *= criticalDmg;
             }
 
@@ -66,7 +109,7 @@ namespace TeamSpartaDungeonGame.PlayerInfo
             int dodgeProb;
             int takeDmg; // 받는 데미지
 
-            takeDmg = monsterDmg;// 몬스터의 데미지가 구현되면 바꿀 예정
+            takeDmg = enemyStats.Atk;// 몬스터의 데미지가 구현되면 바꿀 예정
             dodgeProb = new Random().Next(1, 100);
             if (dodgeProb <= stat.Dodge)
             {
@@ -114,18 +157,22 @@ namespace TeamSpartaDungeonGame.PlayerInfo
                     break;
             }
         }
-        // 구현 안된거 아래로 내림 ///////////////////////////////////////////
-        public void Inventory()
-        {
-            // 인벤토리 클래스를 따로 만드는게 나아보임.
-        }
-        public void UsingItem()
-        {
-            throw new NotImplementedException();
-        }
         public void Death()
         {
-            throw new NotImplementedException();
+            
+            if (stat.Hp == 0)
+            {
+                Console.Clear();
+                Console.WriteLine("운명하셨습니다. . . \n");
+                Console.Write("0. 메인메뉴로 돌아가기\n");
+                int choiceNum = ConsoleUtility.PromptMenuChoice(0, 0);
+
+                if (choiceNum == 0)
+                {
+                    sceneManager.SceneGameLobby();
+                }
+            }
         }
+        
     }
 }

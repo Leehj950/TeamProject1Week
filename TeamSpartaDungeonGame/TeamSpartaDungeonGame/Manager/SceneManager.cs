@@ -11,16 +11,13 @@ namespace TeamSpartaDungeonGame.Manager
     internal class SceneManager
     {
         private static  SceneManager instance;
+
         private GameLobby gameLobby;
         private Dungeon dungeon;
         private RestArea restArea;
         private Shop shop;
         private Player player;
-
-        public SceneManager()
-        {
-            dungeon = new Dungeon();
-        }
+        private Inventory inventory;
 
         public void initalize(Player player)
         {
@@ -28,6 +25,7 @@ namespace TeamSpartaDungeonGame.Manager
             shop = new Shop(player);
             gameLobby = new GameLobby(player);
             restArea = new RestArea(player.Stat);
+            dungeon = new Dungeon(player);
         }
 
         // SceneManager 싱글톤 
@@ -57,12 +55,18 @@ namespace TeamSpartaDungeonGame.Manager
 
         public void SceneRsetArea()
         {
+            restArea.Initialize();
             restArea.Loop();
         }
 
         public void ScenePlayerStats( )
         {
-            
+
+        }
+
+        public void SceneInventory()
+        {
+
         }
     }
 }

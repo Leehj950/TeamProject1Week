@@ -39,27 +39,27 @@ namespace TeamSpartaDungeonGame.PlayerInfo
             }
         }
 
-        public void Render()
-        {
-            Console.Clear();
+public void Render()
+{
+    Console.Clear();
 
-            ConsoleUtility.ShowTitle("■ 인벤토리 ■");
-            Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
-            Console.WriteLine("");
-            Console.WriteLine("[아이템 목록]");
+    ConsoleUtility.ShowTitle("■ 인벤토리 ■");
+    Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
+    Console.WriteLine("");
+    Console.WriteLine("[아이템 목록]");
 
-            for (int i = min; i < max; i++)
-            {
-                inventory[i].PrintItemStatDesciption();
-            }
+    for (int i = min; i < max; i++)
+    {
+        inventory[i].PrintItemStatDesciption();
+    }
 
-            Console.WriteLine("");
-            Console.WriteLine("1. 장착관리");
-            Console.WriteLine("2. 다음 페이지");
-            Console.WriteLine("3. 이전 페이지");
-            Console.WriteLine("0. 나가기");
-            Console.WriteLine("");
-        }
+    Console.WriteLine("");
+    Console.WriteLine("1. 장착관리");
+    Console.WriteLine("2. 다음 페이지");
+    Console.WriteLine("3. 이전 페이지");
+    Console.WriteLine("0. 나가기");
+    Console.WriteLine("");
+}
 
         public void Loop()
         {
@@ -85,7 +85,7 @@ namespace TeamSpartaDungeonGame.PlayerInfo
                     break;
             }
         }
-
+        
         public void EquipMenuRender()
         {
             Console.Clear();
@@ -144,3 +144,4 @@ namespace TeamSpartaDungeonGame.PlayerInfo
         }
     }
 }
+
