@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +14,7 @@ namespace TeamSpartaDungeonGame.Content
     {
 
 
-        private bool isExit;
+        private bool IsExit = false;
         private Player player;
         private List<Item> storeInventory;
         private List<Item> inventory;
@@ -30,23 +30,23 @@ namespace TeamSpartaDungeonGame.Content
         public void InitalizeShop()
         {
             storeInventory = new List<Item>();
-            storeInventory.Add(new Item("낡은 헤드셋", "한쪽만 들리는 헤드셋", ItemType.ARMOR, 0, 15, 30, 1000, 0, 0));
-            storeInventory.Add(new Item("부숴진 키보드", "샷건을 많이 친 키보드", ItemType.WEAPON, 20, 0, 0, 1200, 0, 0));
-            storeInventory.Add(new Item("낡은 마우스", "한쪽만 눌리는 마우스", ItemType.ACCESSORY, 0, 0, 0, 1000, 4, 4));
-            storeInventory.Add(new Item("타구봉", "거지들의 애용 무기", ItemType.WEAPON, 10, 0, 0, 700, 0, 0));
-            storeInventory.Add(new Item("낡은 옷", "구멍이 많이 난 옷", ItemType.ARMOR, 0, 10, 25, 600, 0, 0));
-            storeInventory.Add(new Item("쪽박", "거지들의 애용 밥그릇", ItemType.ACCESSORY, 0, 0, 0, 800, 3, 3));
-            storeInventory.Add(new Item("마이크", "노래방 낡은 마이크", ItemType.WEAPON, 15, 0, 0, 1000, 0, 0));
-            storeInventory.Add(new Item("무대 의상", "반짝이는 옷", ItemType.ARMOR, 0, 18, 60, 1500, 0, 0));
-            storeInventory.Add(new Item("스피커", "소리를 증폭시켜주는 장치", ItemType.ACCESSORY, 0, 0, 0, 2000, 7, 7));
-            storeInventory.Add(new Item("샤넬 백", "명품 가방", ItemType.WEAPON, 40, 0, 0, 6000, 0, 0));
-            storeInventory.Add(new Item("샤넬 코트", "명품 옷", ItemType.ARMOR, 0, 35, 99, 4000, 0, 0));
-            storeInventory.Add(new Item("샤넬 No.5", "명품 향수", ItemType.ACCESSORY, 0, 0, 0, 3000, 9, 9));
+            storeInventory.Add(new Item("낡은 헤드셋", "한쪽만 들리는 헤드셋", ItemType.ARMOR, 0, 15, 30, 0, 1000, 0, 0));
+            storeInventory.Add(new Item("부숴진 키보드", "샷건을 많이 친 키보드", ItemType.WEAPON, 20, 0, 0, 45, 1200, 0, 0));
+            storeInventory.Add(new Item("낡은 마우스", "한쪽만 눌리는 마우스", ItemType.ACCESSORY, 0, 0, 0, 0, 1000, 4, 4));
+            storeInventory.Add(new Item("타구봉", "거지들의 애용 무기", ItemType.WEAPON, 10, 0, 0, 20, 700, 0, 0));
+            storeInventory.Add(new Item("낡은 옷", "구멍이 많이 난 옷", ItemType.ARMOR, 0, 10, 25, 0, 600, 0, 0));
+            storeInventory.Add(new Item("쪽박", "거지들의 애용 밥그릇", ItemType.ACCESSORY, 0, 0, 0, 0, 800, 3, 3));
+            storeInventory.Add(new Item("마이크", "노래방 낡은 마이크", ItemType.WEAPON, 15, 0, 0, 30, 1000, 0, 0));
+            storeInventory.Add(new Item("무대 의상", "반짝이는 옷", ItemType.ARMOR, 0, 18, 60, 0, 1500, 0, 0));
+            storeInventory.Add(new Item("스피커", "소리를 증폭시켜주는 장치", ItemType.ACCESSORY, 0, 0, 0, 0, 2000, 7, 7));
+            storeInventory.Add(new Item("샤넬 백", "명품 가방", ItemType.WEAPON, 40, 0, 0, 80, 6000, 0, 0));
+            storeInventory.Add(new Item("샤넬 코트", "명품 옷", ItemType.ARMOR, 0, 35, 99, 0, 4000, 0, 0));
+            storeInventory.Add(new Item("샤넬 No.5", "명품 향수", ItemType.ACCESSORY, 0, 0, 0, 0, 3000, 9, 9));
         }
 
         public void Update()
         {
-            switch (ConsoleUtility.PromptMenuChoice(0, 3))
+            switch (ConsoleUtility.PromptMenuChoice(0, 4))
             {
                 case 0:
                     //MainMenu();
@@ -61,6 +61,9 @@ namespace TeamSpartaDungeonGame.Content
                 case 3:
                     PreviousPage();
                     Render();
+                    break;
+                case 4:
+                    SellMenuLoop();
                     break;
             }
         }
@@ -84,17 +87,19 @@ namespace TeamSpartaDungeonGame.Content
             Console.WriteLine("1. 아이템 구매");
             Console.WriteLine("2. 다음 페이지");
             Console.WriteLine("3. 이전 페이지");
+            Console.WriteLine("4. 아이템 판매");
             Console.WriteLine("0. 나가기");
             Console.WriteLine("");
         }
 
         public void Loop()
         {
-            while(!isExit)
+            while(!IsExit)
             {
                 Render();
                 Update();
             }
+
         }
 
         public void PurchaseMenuUpdate()
@@ -160,13 +165,60 @@ namespace TeamSpartaDungeonGame.Content
 
         public void PurchaseMenuLoop()
         {
-            while (!isExit)
+            while (!IsExit)
             {
                 PurchaseMenuRender();
                 PurchaseMenuUpdate();
             }
         }
 
+        public void SellMenuUpdate()
+        {
+            int keyInput = ConsoleUtility.PromptMenuChoice(0, inventory.Count);
+
+            switch (keyInput)
+            {
+                case 0:
+                    Loop();
+                    break;
+                default:
+                    // : 판매할 수 있는 경우
+                    player.Stat.Gold += inventory[keyInput - 1].Price;
+                    inventory[keyInput - 1].Selled();
+                    inventory.Remove(inventory[keyInput - 1]);
+                    SellMenuLoop();
+                    break;
+            }
+        }
+
+        public void SellMenuRender()
+        {
+            Console.Clear();
+
+            ConsoleUtility.ShowTitle("■ 상점 - 판매하기■");
+            Console.WriteLine("불필요한 아이템을 팔 수 있습니다.");
+            Console.WriteLine("");
+            Console.WriteLine("[보유 골드]");
+            ConsoleUtility.PrintTextHighlights("", player.Stat.Gold.ToString(), "G");
+            Console.WriteLine("");
+            Console.WriteLine("[아이템 목록]");
+            for (int i = 0; i < inventory.Count; i++)
+            {
+                inventory[i].PrintStoreSellItemStatDesciption(true, i + 1);
+            }
+            Console.WriteLine("");
+            Console.WriteLine("0. 나가기");
+            Console.WriteLine("");
+        }
+
+        public void SellMenuLoop()
+        {
+            while (!IsExit)
+            {
+                SellMenuRender();
+                SellMenuUpdate();
+            }
+        }
 
         public void NextPage()
         {
@@ -199,6 +251,8 @@ namespace TeamSpartaDungeonGame.Content
                 min = 0;
             }
         }
+        
 
     }
 }
+
