@@ -74,7 +74,7 @@ namespace TeamSpartaDungeonGame.Manager
             MainMenu();
         }
 
-        private void MainMenu()
+        public void MainMenu()
         {
             Console.Clear();
 
