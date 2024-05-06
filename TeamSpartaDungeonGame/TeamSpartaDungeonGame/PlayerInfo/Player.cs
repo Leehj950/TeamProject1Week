@@ -139,10 +139,5 @@ namespace TeamSpartaDungeonGame.PlayerInfo
                 }
             }
         }
-        // 구현 안된거 아래로 내림 ///////////////////////////////////////////
-        public void Inventory()
-        {
-            // 인벤토리 클래스를 따로 만드는게 나아보임.
-        }
     }
 }

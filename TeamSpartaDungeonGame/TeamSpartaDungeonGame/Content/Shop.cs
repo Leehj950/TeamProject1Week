@@ -12,8 +12,6 @@ namespace TeamSpartaDungeonGame.Content
 {
     internal class Shop : IFramework
     {
-
-<<<<<<< Updated upstream
         private bool IsExit;
         private Player player;
         private List<Item> storeInventory;
@@ -77,7 +75,7 @@ namespace TeamSpartaDungeonGame.Content
             Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.");
             Console.WriteLine("");
             Console.WriteLine("[보유 골드]");
-            ConsoleUtility.PrintTextHighlights("", player.Gold.ToString(), "G");
+            ConsoleUtility.PrintTextHighlights("", player.Stat.Gold.ToString(), "G");
             Console.WriteLine("");
             Console.WriteLine("[아이템 목록]");
             for (int i = min; i < max; i++)
@@ -93,7 +91,7 @@ namespace TeamSpartaDungeonGame.Content
             switch (ConsoleUtility.PromptMenuChoice(0, 3))
             {
                 case 0:
-                    MainMenu();
+                    
                     break;
                 case 1:
                     PurchaseMenu();
@@ -156,7 +154,7 @@ namespace TeamSpartaDungeonGame.Content
             Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.");
             Console.WriteLine("");
             Console.WriteLine("[보유 골드]");
-            ConsoleUtility.PrintTextHighlights("", player.Gold.ToString(), "G");
+            ConsoleUtility.PrintTextHighlights("", player.Stat.Gold.ToString(), "G");
             Console.WriteLine("");
             Console.WriteLine("[아이템 목록]");
             for (int i = 0; i < storeInventory.Count; i++)
@@ -181,9 +179,9 @@ namespace TeamSpartaDungeonGame.Content
                         PurchaseMenu("이미 구매한 아이템입니다.");
                     }
                     //2 : 돈이 충분해서 살 수 있는 경우
-                    else if (player.Gold >= storeInventory[keyInput - 1].Price)
+                    else if (player.Stat.Gold >= storeInventory[keyInput - 1].Price)
                     {
-                        player.Gold -= storeInventory[keyInput - 1].Price;
+                        player.Stat.Gold -= storeInventory[keyInput - 1].Price;
                         storeInventory[keyInput - 1].Purchased();
                         inventory.Add(storeInventory[keyInput - 1]);
                         PurchaseMenu();
@@ -197,7 +195,6 @@ namespace TeamSpartaDungeonGame.Content
 
             }
         }
-=======
->>>>>>> Stashed changes
+
     }
 }
