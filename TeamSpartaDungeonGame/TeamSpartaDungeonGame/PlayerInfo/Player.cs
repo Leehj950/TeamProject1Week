@@ -28,7 +28,7 @@ namespace TeamSpartaDungeonGame.PlayerInfo
             stat = new Stat();
         }
 
-        
+        bool isExit;
 
         public void Attack() // 수정 많이 해야할듯?
         {
@@ -47,9 +47,30 @@ namespace TeamSpartaDungeonGame.PlayerInfo
             stat.Exp += exp;
         }
 
-        public void StatusMenu()
+        public void StatLoop()
         {
             // 캐릭터 상태창
+            while(isExit)
+            {
+                Render();
+                Update();
+            }
+        }
+
+        void Update()
+        {
+           
+            switch (ConsoleUtility.PromptMenuChoice(0, 0))
+            {
+                case 0:
+                    isExit = true;
+                    break;
+                default:
+                    break;
+            }
+        }
+        void Render()
+        {
             stat.PlayerStatus();
         }
         public float Critical() // 크리티컬 배수 1.6을 곱해주기 위해서 float 자료형 사용
@@ -139,10 +160,6 @@ namespace TeamSpartaDungeonGame.PlayerInfo
                 }
             }
         }
-        // 구현 안된거 아래로 내림 ///////////////////////////////////////////
-        public void Inventory()
-        {
-            // 인벤토리 클래스를 따로 만드는게 나아보임.
-        }
+        
     }
 }

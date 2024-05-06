@@ -4,12 +4,15 @@ using System.Linq;
 using System.Net.Security;
 using System.Text;
 using System.Threading.Tasks;
+using TeamSpartaDungeonGame.Manager;
+using TeamSpartaDungeonGame.Utility;
 
 namespace TeamSpartaDungeonGame.PlayerInfo
 {
     public class Stat
     {
         Player player;
+        SceneManager sceneManager;
 
         public string Name { get; set; }    // 사용자 이름
         public int Lv { get; set; }  // 레  벨
@@ -57,6 +60,15 @@ namespace TeamSpartaDungeonGame.PlayerInfo
             Console.WriteLine($"회피 확률 : {Dodge}\n");
             Console.WriteLine($"보유 골드 : {Gold}\n");
             Console.WriteLine($"현재 경험치 : {Exp}\n");
+
+            Console.WriteLine("0. 나가기\n");
+            Console.Write("원하는 행동을 선택해주세요\n>> ");
+            int input = ConsoleUtility.PromptMenuChoice(0, 0);
+
+            if (input == 0)
+            {
+                sceneManager.SceneGameLobby();
+            }
         }
 
     }

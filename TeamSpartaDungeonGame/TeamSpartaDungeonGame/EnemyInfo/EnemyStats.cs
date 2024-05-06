@@ -26,5 +26,15 @@ namespace TeamSpartaDungeonGame.EnemyInfo
             Gold = gold;
             Exp = exp;
         }
+
+        public void Minion(EnemyStats stats)
+        {
+            Name = "미니언";
+            Level = 2;
+            Atk = 5;
+            Def = 10;
+
+
+        }
     }
 }
