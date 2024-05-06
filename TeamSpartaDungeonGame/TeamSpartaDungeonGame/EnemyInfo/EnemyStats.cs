@@ -12,21 +12,21 @@ namespace TeamSpartaDungeonGame.EnemyInfo
         public int Level { get; set; }
         public int Hp {  get; set; }
         public int Atk { get; set; }
-        public int Def { get; set; }
+        
         public int Gold { get; set; }
         public int Exp { get; set; }
 
         public bool Islive {  get; set; }
 
-        public EnemyStats(string name, int level,int hp, int  atk, int def, int gold, int exp)
+        public EnemyStats(string name, int level,int hp, int  atk, int gold, int exp)
         {
             Name = name;
             Level = level;
             Hp = hp;
             Atk = atk;
-            Def = def;
             Gold = gold;
             Exp = exp;
+            
         }
 
         public void Minion(EnemyStats stats)
@@ -35,9 +35,9 @@ namespace TeamSpartaDungeonGame.EnemyInfo
             Level = 2;
             Hp = 15;
             Atk = 5;
-            Def = 5;
             Gold = 100;
             Exp = 10;
+           
         }
 
         public void VoidBug(EnemyStats stats)
@@ -46,7 +46,7 @@ namespace TeamSpartaDungeonGame.EnemyInfo
             Level = 3;
             Hp = 10;
             Atk = 9;
-            Def = 5;
+            
             Gold = 300;
             Exp = 20;
         }
@@ -57,10 +57,10 @@ namespace TeamSpartaDungeonGame.EnemyInfo
             Level = 5;
             Hp = 25;
             Atk = 8;
-            Def = 5;
             Gold = 500;
             Exp = 30;
-
         }
     }
 }
+
+            
