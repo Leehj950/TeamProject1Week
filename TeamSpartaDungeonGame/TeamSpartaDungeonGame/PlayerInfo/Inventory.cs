@@ -15,6 +15,7 @@ namespace TeamSpartaDungeonGame.PlayerInfo
         private int min = 0;
         const int Pagecount = 9;
         private bool isExit = false;
+        private bool isEuiupEXit = false;
         private List<Item> inventory;
 
         public List<Item> Invent { get { return inventory; } }
@@ -53,21 +54,31 @@ namespace TeamSpartaDungeonGame.PlayerInfo
             Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
             Console.WriteLine("");
             Console.WriteLine("[아이템 목록]");
+            PrintItemlist();
+            Console.WriteLine("");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("1. 장착관리");
+            Console.WriteLine("2. 다음 페이지");
+            Console.WriteLine("3. 이전 페이지");
+            Console.WriteLine("0. 나가기");
+            Console.ResetColor();
+            Console.WriteLine("");
+        }
+
+        public void PrintItemlist()
+        {
             if (inventory.Count != 0)
             {
+                if (max < inventory.Count)
+                {
+                    max = inventory.Count;
+                }
 
                 for (int i = min; i < max; i++)
                 {
                     inventory[i].PrintItemStatDesciption();
                 }
             }
-
-            Console.WriteLine("");
-            Console.WriteLine("1. 장착관리");
-            Console.WriteLine("2. 다음 페이지");
-            Console.WriteLine("3. 이전 페이지");
-            Console.WriteLine("0. 나가기");
-            Console.WriteLine("");
         }
 
         public void Loop()
@@ -77,7 +88,7 @@ namespace TeamSpartaDungeonGame.PlayerInfo
                 Render();
                 Update();
             }
-            isExit = false;
+            ReSet();
         }
 
         public void EquipMenuUpdate()
@@ -87,7 +98,7 @@ namespace TeamSpartaDungeonGame.PlayerInfo
             switch (KeyInput)
             {
                 case 0:
-                    Loop();
+                    isEuiupEXit = true;
                     break;
                 default:
                     inventory[KeyInput - 1].ToggleEquipStatus();
@@ -114,11 +125,18 @@ namespace TeamSpartaDungeonGame.PlayerInfo
         }
         public void EquipMenuLoop()
         {
-            while (!isExit)
+            while (!isEuiupEXit)
             {
                 EquipMenuRender();
                 EquipMenuUpdate();
             }
+            isEuiupEXit = false;
+        }
+
+        public void ReSet()
+        {
+            isExit = false;
+            isEuiupEXit = false;
         }
 
         public void InvenNextPage()

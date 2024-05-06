@@ -21,6 +21,7 @@ namespace TeamSpartaDungeonGame.PlayerInfo
     {
         Stat stat;
         Inventory inventory;
+        bool isExit;
         public Inventory Invern { get { return inventory; } }
         public Stat Stat { get { return stat; } }
         public Player()
@@ -29,20 +30,7 @@ namespace TeamSpartaDungeonGame.PlayerInfo
             inventory = new Inventory();
         }
 
-        bool isExit;
 
-        public void Select() // 수정 많이 해야할듯?
-        {
-            Console.WriteLine("공격할 몬스터를 선택해주세요\n");
-            Console.WriteLine("1. {0} \n 2. {1} \n 3. {2} \n", 0); // 몬스터가 구현되면 바꿀 예정
-            Console.Write(" >> ");
-            int playerChoice = ConsoleUtility.PromptMenuChoice(1, 3);
-
-            switch (playerChoice)
-            {
-
-            }
-        }
         public void Attack(Enemy enemy)
         {
             Console.Clear();
@@ -69,11 +57,12 @@ namespace TeamSpartaDungeonGame.PlayerInfo
                 Render();
                 Update();
             }
+            isExit = false;
         }
 
         void Update()
         {
-
+            
             switch (ConsoleUtility.PromptMenuChoice(0, 0))
             {
                 case 0:
@@ -87,6 +76,9 @@ namespace TeamSpartaDungeonGame.PlayerInfo
         {
             Console.Clear();
             stat.PlayerStatus();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("0. 나가기");
+            Console.ResetColor();
         }
         public float Critical() // 크리티컬 배수 1.6을 곱해주기 위해서 float 자료형 사용
         {
@@ -126,17 +118,19 @@ namespace TeamSpartaDungeonGame.PlayerInfo
         public void CreatePlayer()
         {
             Console.Clear();
-
+            ConsoleUtility.ShowTitle("■ 캐릭터 생성 ■");
             Console.WriteLine("이름 작성해주세요.");
             stat.Name = Console.ReadLine();
 
-            Console.WriteLine("직업선택");
-
+            Console.Clear();
+            ConsoleUtility.ShowTitle("■ 직업선택 ■");
             Console.WriteLine("프로그래머 : Atk : -5 , Hp : -50 , Mp : +100");
             Console.WriteLine("거지 : Hp : +30 , Def : +5 , Dodge : +15");
             Console.WriteLine("가수 : Atk : +5 , Crit : +20 , Critd -= 10");
             Console.WriteLine("부자 : Hp : -50 , Mp : -50, Def : -5 Atk : -5, Gold : +10000 ");
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("1. 프로그래머\n2. 거지\n3. 가수\n4. 부자\n");
+            Console.ResetColor();
             Console.Write("직업을 선택해주세요");
             Console.WriteLine(">>");
             int playerChoice = ConsoleUtility.PromptMenuChoice(1, 4);
@@ -151,12 +145,15 @@ namespace TeamSpartaDungeonGame.PlayerInfo
                 case (int)PlayerJob.PROGRAMMER:
                     stat.Job = "프로그래머";
                     stat.Atk -= 5;
-                    stat.Hp -= 50;
+                    stat.MaxHp -= 50;
+                    stat.Hp = stat.MaxHp;
                     stat.Mp += 100;
+                    stat.MaxMp = stat.Mp;
                     break;
                 case (int)PlayerJob.POOR:
                     stat.Job = "거지";
-                    stat.Hp += 30;
+                    stat.MaxHp += 30;
+                    stat.Hp = stat.MaxHp;
                     stat.Def += 5;
                     stat.Dodge += 15;
                     break;
@@ -168,8 +165,10 @@ namespace TeamSpartaDungeonGame.PlayerInfo
                     break;
                 case (int)PlayerJob.RICH:
                     stat.Job = "부자";
-                    stat.Hp -= 50;
-                    stat.Mp -= 50;
+                    stat.MaxHp -= 50;
+                    stat.Hp = stat.MaxHp;
+                    stat.MaxMp -= 50;
+                    stat.Mp = stat.MaxMp;
                     stat.Def -= 5;
                     stat.Atk -= 5;
                     stat.Gold += 10000;
@@ -198,6 +197,8 @@ namespace TeamSpartaDungeonGame.PlayerInfo
 
             if (choiceNum == 0)
             {
+                stat.Hp = 10;
+
                 return true;
             }
 

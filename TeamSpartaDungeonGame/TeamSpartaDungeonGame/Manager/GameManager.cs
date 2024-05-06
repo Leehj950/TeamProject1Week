@@ -15,8 +15,7 @@ namespace TeamSpartaDungeonGame.Manager
     public enum MenuList
     {
         GAMESTART = 1,
-        GAMELOAD = 2,
-        EXIT = 3
+        EXIT = 2
     }
 
     internal class GameManager : IFramework
@@ -51,20 +50,31 @@ namespace TeamSpartaDungeonGame.Manager
             this.Loop();
         }
 
-
         public void Render()
         {
             Console.Clear();
-            ConsoleUtility.PrintOutline();
-            ConsoleUtility.PrintGameTitle();
-            ConsoleUtility.PrintGameHeader();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("스파르타");
+            Console.ResetColor();
+            
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine(" 던전에 오신 여러분 환영합니다.");
+            Console.ResetColor();
+            
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("1. 게임시작");
+            Console.WriteLine("2. 게임종료");
+            Console.ResetColor();
+//             ConsoleUtility.PrintOutline();
+//             ConsoleUtility.PrintGameTitle();
+//             ConsoleUtility.PrintGameHeader();
+
         }
 
         public void Update()
         {
-           
-
-            switch ((MenuList)ConsoleUtility.PromptMenuChoice(1, 3, 48, 40))
+            switch ((MenuList)ConsoleUtility.PromptMenuChoice(1, 2))
             {
                 case MenuList.GAMESTART:
                     Console.WriteLine();
@@ -74,11 +84,6 @@ namespace TeamSpartaDungeonGame.Manager
                     }
                     // 그후 로비로 가는 것 의미한다.
                     sceneManager.SceneGameLobby();
-                    break;
-                case MenuList.GAMELOAD:
-                    Console.WriteLine();
-                    // 세이브 데이터 불러오기
-                    dateManager.LoadDate();
                     break;
                 case MenuList.EXIT:
                     Console.WriteLine();

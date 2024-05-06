@@ -15,6 +15,8 @@ namespace TeamSpartaDungeonGame.Content
 
 
         private bool isExit = false;
+        private bool isExitPurch = false;
+        private bool isExitSell = false;
         private Player player;
         private List<Item> storeInventory;
         //private List<Item> inventory;
@@ -84,12 +86,14 @@ namespace TeamSpartaDungeonGame.Content
                 storeInventory[i].PrintStoreItemStatDesciption();
             }
             Console.WriteLine("");
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("1. 아이템 구매");
             Console.WriteLine("2. 다음 페이지");
             Console.WriteLine("3. 이전 페이지");
             Console.WriteLine("4. 아이템 판매");
             Console.WriteLine("0. 나가기");
             Console.WriteLine("");
+            Console.ResetColor();
         }
 
         public void Loop()
@@ -99,7 +103,14 @@ namespace TeamSpartaDungeonGame.Content
                 Render();
                 Update();
             }
+            Reset();
+        }
+
+        void Reset()
+        {
             isExit = false;
+            isExitPurch = false;
+            isExitSell = false;
         }
 
         public void PurchaseMenuUpdate()
@@ -109,7 +120,7 @@ namespace TeamSpartaDungeonGame.Content
             switch (keyInput)
             {
                 case 0:
-                    Loop();
+                    isExitPurch = true; 
                     break;
                 default:
                     //1 : 이미 구매한 경우
@@ -159,13 +170,15 @@ namespace TeamSpartaDungeonGame.Content
                 storeInventory[i].PrintStoreItemStatDesciption(true, i + 1);
             }
             Console.WriteLine("");
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("0. 나가기");
+            Console.ResetColor();
             Console.WriteLine("");
         }
 
         public void PurchaseMenuLoop()
         {
-            while (!isExit)
+            while (!isExitPurch)
             {
                 PurchaseMenuRender();
                 PurchaseMenuUpdate();
@@ -179,7 +192,7 @@ namespace TeamSpartaDungeonGame.Content
             switch (keyInput)
             {
                 case 0:
-                    Loop();
+                    isExitSell = true;
                     break;
                 default:
                     // : 판매할 수 있는 경우
@@ -209,14 +222,14 @@ namespace TeamSpartaDungeonGame.Content
                     inventory.Invent[i].PrintStoreSellItemStatDesciption(true, i + 1);
                 }
             }
-            Console.WriteLine("");
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("0. 나가기");
-            Console.WriteLine("");
+            Console.ResetColor();
         }
 
         public void SellMenuLoop()
         {
-            while (!isExit)
+            while (!isExitSell)
             {
                 SellMenuRender();
                 SellMenuUpdate();

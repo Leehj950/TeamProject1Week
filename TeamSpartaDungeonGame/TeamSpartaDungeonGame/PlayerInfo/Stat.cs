@@ -36,9 +36,9 @@ namespace TeamSpartaDungeonGame.PlayerInfo
             Atk = 10;
             Def = 10;
             Hp = 100;
-            MaxHp = 100;
-            Mp = 50;
-            MaxMp = 50;
+            MaxHp = Hp;
+            Mp = 100;
+            MaxMp = Mp;
             Crit = 10;
             Critd = 160;
             Dodge = 10;
@@ -48,14 +48,14 @@ namespace TeamSpartaDungeonGame.PlayerInfo
 
         public void PlayerStatus()
         {
-            Console.WriteLine("     [스탯 창]     \n");
+            ConsoleUtility.ShowTitle("     [스탯 창]     \n");
             Console.WriteLine($"이  름         : {Name}");
             Console.WriteLine($"직  업         : {Job}");
             Console.WriteLine($"LEVEL          : {Lv}");
             Console.WriteLine($"공격력         : {Atk}");
             Console.WriteLine($"방어력         : {Def}");
-            Console.WriteLine($"체  력         : {Hp}");
-            Console.WriteLine($"마  나         : {Mp}");
+            Console.WriteLine($"체  력         : {MaxHp} / {Hp}");
+            Console.WriteLine($"마  나         : {MaxMp} / {Mp}");
             Console.WriteLine($"크리티컬 확률   : {Crit}");
             Console.WriteLine($"크리티컬 데미지 : {Critd}");
             Console.WriteLine($"회피 확률 : {Dodge}\n");
