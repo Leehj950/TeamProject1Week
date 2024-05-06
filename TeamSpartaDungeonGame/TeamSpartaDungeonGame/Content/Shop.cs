@@ -44,9 +44,9 @@ namespace TeamSpartaDungeonGame.Content
             storeInventory.Add(new Item("샤넬 No.5", "명품 향수", ItemType.ACCESSORY, 0, 0, 0, 3000, 9, 9));
         }
 
-        public void StoreMenuUpdate()
+        public void Update()
         {
-            switch (ConsoleUtility.PromptMenuChoice(0, 3))
+            switch (ConsoleUtility.PromptMenuChoice(0, 4))
             {
                 case 0:
                     //MainMenu();
@@ -56,16 +56,19 @@ namespace TeamSpartaDungeonGame.Content
                     break;
                 case 2:
                     NextPage();
-                    StoreMenuRender();
+                    Render();
                     break;
                 case 3:
                     PreviousPage();
-                    StoreMenuRender();
+                    Render();
+                    break;
+                case 4:
+                    SellMenuLoop();
                     break;
             }
         }
         
-        public void StoreMenuRender()
+        public void Render()
         {
             Console.Clear();
 
@@ -73,7 +76,7 @@ namespace TeamSpartaDungeonGame.Content
             Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.");
             Console.WriteLine("");
             Console.WriteLine("[보유 골드]");
-            ConsoleUtility.PrintTextHighlights("", player.Gold.ToString(), "G");
+            ConsoleUtility.PrintTextHighlights("", player.Stat.Gold.ToString(), "G");
             Console.WriteLine("");
             Console.WriteLine("[아이템 목록]");
             for (int i = min; i < max; i++)
@@ -84,16 +87,17 @@ namespace TeamSpartaDungeonGame.Content
             Console.WriteLine("1. 아이템 구매");
             Console.WriteLine("2. 다음 페이지");
             Console.WriteLine("3. 이전 페이지");
+            Console.WriteLine("4. 아이템 판매");
             Console.WriteLine("0. 나가기");
             Console.WriteLine("");
         }
 
-        public void StoreMenuLoop()
+        public void Loop()
         {
             while(!IsExit)
             {
-                StoreMenuRender();
-                StoreMenuUpdate();
+                Render();
+                Update();
             }
 
         }
@@ -105,7 +109,7 @@ namespace TeamSpartaDungeonGame.Content
             switch (keyInput)
             {
                 case 0:
-                    StoreMenuLoop();
+                    Loop();
                     break;
                 default:
                     //1 : 이미 구매한 경우
@@ -114,9 +118,9 @@ namespace TeamSpartaDungeonGame.Content
                         PurchaseMenuRender("이미 구매한 아이템입니다.");
                     }
                     //2 : 돈이 충분해서 살 수 있는 경우
-                    else if (player.Gold >= storeInventory[keyInput - 1].Price)
+                    else if (player.Stat.Gold >= storeInventory[keyInput - 1].Price)
                     {
-                        player.Gold -= storeInventory[keyInput - 1].Price;
+                        player.Stat.Gold -= storeInventory[keyInput - 1].Price;
                         storeInventory[keyInput - 1].Purchased();
                         inventory.Add(storeInventory[keyInput - 1]);
                         PurchaseMenuLoop();
@@ -147,7 +151,7 @@ namespace TeamSpartaDungeonGame.Content
             Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.");
             Console.WriteLine("");
             Console.WriteLine("[보유 골드]");
-            ConsoleUtility.PrintTextHighlights("", player.Gold.ToString(), "G");
+            ConsoleUtility.PrintTextHighlights("", player.Stat.Gold.ToString(), "G");
             Console.WriteLine("");
             Console.WriteLine("[아이템 목록]");
             for (int i = 0; i < storeInventory.Count; i++)
@@ -168,6 +172,53 @@ namespace TeamSpartaDungeonGame.Content
             }
         }
 
+        public void SellMenuUpdate()
+        {
+            int keyInput = ConsoleUtility.PromptMenuChoice(0, inventory.Count);
+
+            switch (keyInput)
+            {
+                case 0:
+                    Loop();
+                    break;
+                default:
+                    // : 판매할 수 있는 경우
+                    player.Stat.Gold += inventory[keyInput - 1].Price;
+                    inventory[keyInput - 1].Selled();
+                    inventory.Remove(inventory[keyInput - 1]);
+                    SellMenuLoop();
+                    break;
+            }
+        }
+
+        public void SellMenuRender()
+        {
+            Console.Clear();
+
+            ConsoleUtility.ShowTitle("■ 상점 - 판매하기■");
+            Console.WriteLine("불필요한 아이템을 팔 수 있습니다.");
+            Console.WriteLine("");
+            Console.WriteLine("[보유 골드]");
+            ConsoleUtility.PrintTextHighlights("", player.Stat.Gold.ToString(), "G");
+            Console.WriteLine("");
+            Console.WriteLine("[아이템 목록]");
+            for (int i = 0; i < inventory.Count; i++)
+            {
+                inventory[i].PrintStoreSellItemStatDesciption(true, i + 1);
+            }
+            Console.WriteLine("");
+            Console.WriteLine("0. 나가기");
+            Console.WriteLine("");
+        }
+
+        public void SellMenuLoop()
+        {
+            while (!IsExit)
+            {
+                SellMenuRender();
+                SellMenuUpdate();
+            }
+        }
 
         public void NextPage()
         {

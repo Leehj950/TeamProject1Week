@@ -15,7 +15,7 @@ namespace TeamSpartaDungeonGame.ItemInfo
         const int Pagecount = 9;
 
         private List<Item> inventory;
-        GameManager gameManager = new GameManager();
+        
 
         private void InventoryMenu()
         {
@@ -41,7 +41,7 @@ namespace TeamSpartaDungeonGame.ItemInfo
             switch (ConsoleUtility.PromptMenuChoice(0, 3))
             {
                 case 0:
-                    MainMenu();
+                    //MainMenu();
                     break;
                 case 1:
                     EquipMenu();
