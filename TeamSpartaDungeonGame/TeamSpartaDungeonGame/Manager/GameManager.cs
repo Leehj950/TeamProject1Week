@@ -1,83 +1,106 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using TeamSpartaDungeonGame.Interface;
 using TeamSpartaDungeonGame.PlayerInfo;
+
+using TeamSpartaDungeonGame.Utility;
+
 
 namespace TeamSpartaDungeonGame.Manager
 {
     public enum MenuList
     {
-        GameStart = 1,
-        GameLoad = 2, 
-        Exit = 3
+        GAMESTART = 1,
+        GAMELOAD = 2,
+        EXIT = 3
     }
 
-    internal class GameManager
+    internal class GameManager : IFramework
     {
 
         private Player player;
+        private static GameManager instance = null;
         private DateManager dateManager;
+        private SceneManager sceneManager;
 
         public GameManager()
         {
-            InitializeGame();
+            player = new Player();
+            dateManager = DateManager.Instance();
+            sceneManager = SceneManager.Instance();
+            sceneManager.initalize(player);
+            Console.Title = "TeamSpartDungenGame";
+            Console.SetWindowSize(122, 52);
         }
 
-        private void InitializeGame()
+        public static GameManager Instance()
         {
-            dateManager = new DateManager();
-            player = new Player("test", "Programmer", 1, 10, 5, 100, 15000);
+            if (instance == null)
+            {
+                return instance = new GameManager();
+            }
+            return instance;
         }
 
         public void StartGame()
         {
-            Console.Clear();
-            PrintGameHeader();
-            MainMenu();
+            this.Loop();
         }
 
-        private void MainMenu()
+
+        public void Render()
+        {
+            Console.Clear();
+            ConsoleUtility.PrintOutline();
+            ConsoleUtility.PrintGameTitle();
+            ConsoleUtility.PrintGameHeader();
+        }
+
+        public void Update()
         {
             Console.Clear();
 
-            int choice = PromptMenuChoice(1, 3);
+            //int choice = PromptMenuChoice(1, 3);
+            int choice = ConsoleUtility.PromptMenuChoice(1, 3, 48, 40);
 
             switch ((MenuList)choice)
             {
-                case MenuList.GameStart:
+                case MenuList.GAMESTART:
                     Console.WriteLine();
+                    //if (Name == "")
+                    //{
+                    //    // 캐릭터 만드는 함수 
+                    //    //player가 만들어지면 만드는 함수
+                    //}
+                    // 그후 로비로 가는 것 의미한다.
+                    sceneManager.SceneGameLobby();
                     break;
-                case MenuList.GameLoad:
+                case MenuList.GAMELOAD:
                     Console.WriteLine();
+                    // 세이브 데이터 불러오기
+                    dateManager.LoadDate();
                     break;
-                case MenuList.Exit:
+                case MenuList.EXIT:
                     Console.WriteLine();
+                    // 게임 종료
+                    Environment.Exit(0);
                     break;
                 default:
                     break;
             }
         }
-
-        public void PrintGameHeader()
+        
+        public void Loop()
         {
-            Console.WriteLine();
-            Console.WriteLine();
-
-        }
-
-        public int PromptMenuChoice(int min, int max)
-        {
-            while (true)
+            while(true)
             {
-                if (int.TryParse(Console.ReadLine(), out int choice) && choice >= min && choice <= max)
-                {
-                    return choice;
-                }
-                Console.WriteLine("다시 입력해주세요.");
+                Render();
+                Update();
             }
         }
     }
-
 }
