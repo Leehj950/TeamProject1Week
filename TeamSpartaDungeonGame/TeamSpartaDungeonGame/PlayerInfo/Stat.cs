@@ -12,9 +12,24 @@ namespace TeamSpartaDungeonGame.PlayerInfo
 {
     public class Stat
     {
-        private List<Item> inventory;
+
+        static private List<Item> inventory;
+
+        public int bonusAtk = inventory.Select(item => item.IsEquipped ? item.Atk : 0).Sum();
+        public int bonusDef = inventory.Select(item => item.IsEquipped ? item.Def : 0).Sum();
+        public int bonusHp = inventory.Select(item => item.IsEquipped ? item.Hp : 0).Sum();
+        public int bonusMp = inventory.Select(item => item.IsEquipped ? item.Mp : 0).Sum();
+        public float bonusCrit = inventory.Select(item => item.IsEquipped ? item.Crit : 0).Sum();
+        public float bonusDodge = inventory.Select(item => item.IsEquipped ? item.Dodge : 0).Sum();
+
         private string name;
         public string Name { get { return name; } set { name = value; } }    // 사용자 이름
+
+
+      
+        private string name;
+        public string Name { get { return name; } set { name = value; } }    // 사용자 이름
+
 
         public string Job { get; set; }
         public int Lv { get; set; }  // 레  벨
@@ -46,15 +61,10 @@ namespace TeamSpartaDungeonGame.PlayerInfo
             Gold = 2000;
             Exp = 0;
         }
+          
 
         public void PlayerStatus()
         {
-            int bonusAtk = inventory.Select(item => item.IsEquipped ? item.Atk : 0).Sum();
-            int bonusDef = inventory.Select(item => item.IsEquipped ? item.Def : 0).Sum();
-            int bonusHp = inventory.Select(item => item.IsEquipped ? item.Hp : 0).Sum();
-            int bonusMp = inventory.Select(item => item.IsEquipped ? item.Mp : 0).Sum();
-            float bonusCrit = inventory.Select(item => item.IsEquipped ? item.Crit : 0).Sum();
-            float bonusDodge = inventory.Select(item => item.IsEquipped ? item.Dodge : 0).Sum();
 
             Console.WriteLine("     [스탯 창]     \n");
             Console.WriteLine($"이  름         : {Name}");
