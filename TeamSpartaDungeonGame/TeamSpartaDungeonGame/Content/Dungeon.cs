@@ -206,7 +206,8 @@ namespace TeamSpartaDungeonGame.Content
         {
             enemies.Clear();
             isBattle = false;
-            isDungeonExit= false;
+            isTarget = false;
+            isDungeonExit = false;
             isExit = false;
         }
         void EnemeyTurn()
@@ -214,10 +215,14 @@ namespace TeamSpartaDungeonGame.Content
             int number;
             while (true)
             {
-                Random random = new Random();
-                number = random.Next(1, enemies.Count);
+                if (enemyCount == 0)
+                {
 
-                if (enemies[number-1].Stats.Hp <= 0)
+                }
+                Random random = new Random();
+                number = random.Next(1, enemies.Count + 1);
+
+                if (enemies[number - 1].Stats.Hp <= 0)
                 {
                     continue;
                 }
@@ -229,7 +234,7 @@ namespace TeamSpartaDungeonGame.Content
 
             int curHp = player.Stat.Hp;
 
-            enemies[number].Attack(player);
+            enemies[number - 1].Attack(player);
 
             int selet = ConsoleUtility.PromptMenuChoice(0, 0);
 
@@ -241,6 +246,7 @@ namespace TeamSpartaDungeonGame.Content
             {
                 bool islive = player.Death(curHp);
                 isDungeonExit = islive;
+                isTarget = islive;
                 isExit = islive;
             }
         }
@@ -254,7 +260,7 @@ namespace TeamSpartaDungeonGame.Content
                 Console.WriteLine("");
                 for (int i = 0; i < enemies.Count; i++)
                 {
-                    enemies[i].PrintStat(isBattle, i );
+                    enemies[i].PrintStat(isBattle, i);
                 }
 
                 Console.WriteLine();
@@ -262,12 +268,12 @@ namespace TeamSpartaDungeonGame.Content
 
                 int selet = ConsoleUtility.PromptMenuChoice(1, enemies.Count);
 
-                if (enemies[selet-1].Stats.Hp <= 0)
+                if (enemies[selet - 1].Stats.Hp <= 0)
                 {
                     continue;
                 }
 
-                PlayerResult(enemies[selet-1]);
+                PlayerResult(enemies[selet - 1]);
             }
 
         }
@@ -277,6 +283,10 @@ namespace TeamSpartaDungeonGame.Content
             // 전투
             player.Attack(number);
             // 전투후
+            if (number.Stats.Hp <= 0)
+            {
+                enemyCount--;
+            }
 
             Console.WriteLine("0. 다음");
 
@@ -301,9 +311,10 @@ namespace TeamSpartaDungeonGame.Content
             Console.WriteLine("Victory");
             Console.WriteLine();
             Console.WriteLine($"던전에서 몬스터 {enemies.Count}마리를 잡았습니다.");
-
             Console.WriteLine($"Lv.{player.Stat.Lv} {player.Stat.Name}");
-
+            int addMoney = GetGoldMoney();
+            Console.WriteLine($"{player.Stat.Gold} + {addMoney}");
+            player.Stat.Gold += GetGoldMoney();
             Console.WriteLine("0. 다음");
 
             int selet = ConsoleUtility.PromptMenuChoice(0, 0);
@@ -311,10 +322,20 @@ namespace TeamSpartaDungeonGame.Content
             if (selet == 0)
             {
                 isDungeonExit = true;
+                isTarget = true;
                 isExit = true;
             }
         }
 
+        int GetGoldMoney()
+        {
+            int money = 0;
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                money += enemies[i].Stats.Gold;
+            }
+            return money;
+        }
     }
 
 

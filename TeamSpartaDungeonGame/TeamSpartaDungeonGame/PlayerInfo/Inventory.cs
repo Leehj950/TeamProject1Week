@@ -14,16 +14,22 @@ namespace TeamSpartaDungeonGame.PlayerInfo
         private int max = Pagecount;
         private int min = 0;
         const int Pagecount = 9;
-        private bool IsExit = false;
-
+        private bool isExit = false;
         private List<Item> inventory;
+
+        public List<Item> Invent { get { return inventory; } }
+
+        public Inventory()
+        {
+            inventory = new List<Item>();
+        }
 
         public void Update()
         {
             switch (ConsoleUtility.PromptMenuChoice(0, 3))
             {
                 case 0:
-                    //MainMenu();
+                    isExit = true;
                     break;
                 case 1:
                     EquipMenuLoop();
@@ -39,35 +45,39 @@ namespace TeamSpartaDungeonGame.PlayerInfo
             }
         }
 
-public void Render()
-{
-    Console.Clear();
+        public void Render()
+        {
+            Console.Clear();
 
-    ConsoleUtility.ShowTitle("■ 인벤토리 ■");
-    Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
-    Console.WriteLine("");
-    Console.WriteLine("[아이템 목록]");
+            ConsoleUtility.ShowTitle("■ 인벤토리 ■");
+            Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
+            Console.WriteLine("");
+            Console.WriteLine("[아이템 목록]");
+            if (inventory.Count != 0)
+            {
 
-    for (int i = min; i < max; i++)
-    {
-        inventory[i].PrintItemStatDesciption();
-    }
+                for (int i = min; i < max; i++)
+                {
+                    inventory[i].PrintItemStatDesciption();
+                }
+            }
 
-    Console.WriteLine("");
-    Console.WriteLine("1. 장착관리");
-    Console.WriteLine("2. 다음 페이지");
-    Console.WriteLine("3. 이전 페이지");
-    Console.WriteLine("0. 나가기");
-    Console.WriteLine("");
-}
+            Console.WriteLine("");
+            Console.WriteLine("1. 장착관리");
+            Console.WriteLine("2. 다음 페이지");
+            Console.WriteLine("3. 이전 페이지");
+            Console.WriteLine("0. 나가기");
+            Console.WriteLine("");
+        }
 
         public void Loop()
         {
-            while (!IsExit)
+            while (!isExit)
             {
                 Render();
                 Update();
             }
+            isExit = false;
         }
 
         public void EquipMenuUpdate()
@@ -85,7 +95,7 @@ public void Render()
                     break;
             }
         }
-        
+
         public void EquipMenuRender()
         {
             Console.Clear();
@@ -104,7 +114,7 @@ public void Render()
         }
         public void EquipMenuLoop()
         {
-            while (!IsExit)
+            while (!isExit)
             {
                 EquipMenuRender();
                 EquipMenuUpdate();
