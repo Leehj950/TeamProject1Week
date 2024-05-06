@@ -26,39 +26,6 @@ namespace TeamSpartaDungeonGame.EnemyInfo
             Atk = atk;
             Gold = gold;
             Exp = exp;
-            
-        }
-
-        public void Minion(EnemyStats stats)
-        {
-            Name = "미니언";
-            Level = 2;
-            Hp = 15;
-            Atk = 5;
-            Gold = 100;
-            Exp = 10;
-           
-        }
-
-        public void VoidBug(EnemyStats stats)
-        {
-            Name = "공허충";
-            Level = 3;
-            Hp = 10;
-            Atk = 9;
-            
-            Gold = 300;
-            Exp = 20;
-        }
-
-        public void CanonMinion(EnemyStats stats)
-        {
-            Name = "대포미니언";
-            Level = 5;
-            Hp = 25;
-            Atk = 8;
-            Gold = 500;
-            Exp = 30;
         }
     }
 }

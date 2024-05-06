@@ -27,7 +27,7 @@ namespace TeamSpartaDungeonGame.Content
     {
 
         private Player player;
-        private bool IsExit;
+        private bool isExit;
         public GameLobby(Player player)
         {
             this.player = player;
@@ -63,7 +63,6 @@ namespace TeamSpartaDungeonGame.Content
             {
                 case LobbyList.PLAYSTATS:
                     SceneManager.Instance().ScenePlayerStats();
-
                     break;
                 case LobbyList.INVERTER:
                     SceneManager.Instance().SceneInventory();
@@ -89,7 +88,7 @@ namespace TeamSpartaDungeonGame.Content
         }
         public void Loop()
         {
-            while (!IsExit)
+            while (!isExit)
             {
                 Render();
                 Update();
