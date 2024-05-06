@@ -64,16 +64,18 @@ namespace TeamSpartaDungeonGame.ItemInfo
                 Console.Write("E");
                 Console.ResetColor();
                 Console.Write("]");
-                Console.Write(ConsoleUtility.PadRightForMixedText(Name, 9));
+                Console.Write(ConsoleUtility.PadRightForMixedText(Name, 15));
                 //총 12칸중에서 [E]가 포함되서 9를 반환
             }
-            else Console.Write(ConsoleUtility.PadRightForMixedText(Name, 12));
+            else Console.Write(ConsoleUtility.PadRightForMixedText(Name, 18));
 
             Console.Write(" | ");
 
-            if (Atk != 0) Console.Write($"공격력 {(Atk >= 0 ? "+" : "")}{Atk} ");
+            if (Atk != 0) Console.Write($"공격력{(Atk >= 0 ? "+" : "")}{Atk}             ");
             if (Def != 0) Console.Write($"방어력 {(Def >= 0 ? "+" : "")}{Def} ");
-            if (Hp != 0) Console.Write($"체   력 {(Hp >= 0 ? "+" : "")}{Hp} ");
+            if (Hp != 0) Console.Write($"체  력 {(Hp >= 0 ? "+" : "")}{Hp} ");
+            if (Crit != 0) Console.Write($"치명타률 {(Crit >= 0 ? "+" : "")}{Crit} ");
+            if (Dodge != 0) Console.Write($"회피률 {(Dodge >= 0 ? "+" : "")}{Dodge} ");
 
             Console.Write(" | ");
 
