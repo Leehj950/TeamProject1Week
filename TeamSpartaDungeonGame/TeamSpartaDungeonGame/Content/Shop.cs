@@ -13,7 +13,7 @@ namespace TeamSpartaDungeonGame.Content
     internal class Shop : IFramework
     {
 
-<<<<<<< Updated upstream
+
         private bool IsExit = false;
         private Player player;
         private List<Item> storeInventory;
@@ -252,7 +252,6 @@ namespace TeamSpartaDungeonGame.Content
             }
         }
         
-=======
->>>>>>> Stashed changes
+
     }
 }
