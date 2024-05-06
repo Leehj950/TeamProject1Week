@@ -8,14 +8,16 @@ namespace TeamSpartaDungeonGame.EnemyInfo
 {
     internal class EnemyStats
     {
-        public string Name;
-        public int Level;
-        public float Atk;
-        public int Def;
-        public int Gold;
-        public int Exp;
+        public string Name { get; set; }
+        public int Level { get; set; }
+        public int Atk { get; set; }
+        public int Def { get; set; }
+        public int Gold { get; set; }
+        public int Exp { get; set; }
 
-        public EnemyStats(string name, int level, float atk, int def, int gold, int exp)
+        public bool Islive {  get; set; }
+
+        public EnemyStats(string name, int level, int  atk, int def, int gold, int exp)
         {
             Name = name;
             Level = level;

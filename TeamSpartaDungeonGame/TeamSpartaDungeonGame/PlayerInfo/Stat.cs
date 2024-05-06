@@ -47,7 +47,6 @@ namespace TeamSpartaDungeonGame.PlayerInfo
 
         public void PlayerStatus()
         {
-            
 
             Console.WriteLine("     [스탯 창]     \n");
             Console.WriteLine($"이  름         : {Name}");

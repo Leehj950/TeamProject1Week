@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeamSpartaDungeonGame.Interface;
+using TeamSpartaDungeonGame.Manager;
 using TeamSpartaDungeonGame.PlayerInfo;
 using TeamSpartaDungeonGame.Utility;
 
@@ -19,7 +20,6 @@ namespace TeamSpartaDungeonGame.Content
         SAVE,
         TITLE,
         EXIT
-
     }
 
 
@@ -27,18 +27,31 @@ namespace TeamSpartaDungeonGame.Content
     {
 
         private Player player;
-        private RestArea restArea;
         private bool IsExit;
         public GameLobby(Player player)
         {
             this.player = player;
-            restArea = new RestArea(player.Stat);
-
         }
         // 렌더러는 거기서 그림을 출력하는 함수.
         public void Render()
         {
-
+            Console.Clear();
+            //ConsoleUtility.PrintOutline();
+            Console.WriteLine();
+            Console.Write("1.플레이어 스탯창");
+            Console.WriteLine();
+            Console.Write("2.인벤토리");
+            Console.WriteLine();
+            Console.Write("3.상점");
+            Console.WriteLine();
+            Console.Write("4. 휴식처");
+            Console.WriteLine();
+            Console.Write("5. 던전");
+            Console.WriteLine();
+            Console.Write("6. 저장하기");
+            Console.WriteLine();
+            Console.Write("7. 게임종료");
+            Console.WriteLine();
         }
         //업데이트는 입력및 계산을 주로 업데이트에서 하고
         // 입력을 받는 것을 주로 합니다.
@@ -49,16 +62,23 @@ namespace TeamSpartaDungeonGame.Content
             switch ((LobbyList)number)
             {
                 case LobbyList.PLAYSTATS:
+                    SceneManager.Instance().ScenePlayerStats();
+
                     break;
                 case LobbyList.INVERTER:
+                    SceneManager.Instance().SceneInventory();
                     break;
                 case LobbyList.SHOP:
+                    SceneManager.Instance().SceneShop();
                     break;
                 case LobbyList.RESTAREA:
+                    SceneManager.Instance().SceneRsetArea();
                     break;
                 case LobbyList.DUNGEON:
+                    SceneManager.Instance().SceneDungeon();
                     break;
                 case LobbyList.SAVE:
+                    DateManager.Instance().SaveDate();
                     break;
                 case LobbyList.EXIT:
                     Environment.Exit(0);
@@ -69,7 +89,7 @@ namespace TeamSpartaDungeonGame.Content
         }
         public void Loop()
         {
-            while (IsExit)
+            while (!IsExit)
             {
                 Render();
                 Update();
