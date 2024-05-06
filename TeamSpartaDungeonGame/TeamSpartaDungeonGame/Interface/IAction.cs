@@ -11,9 +11,9 @@ namespace TeamSpartaDungeonGame.Interface
 
         public void Attack();
         public void Death();
-        public void UsingItem();
         public float Critical();
         public void Dodge();
+        
     }
 }
 
