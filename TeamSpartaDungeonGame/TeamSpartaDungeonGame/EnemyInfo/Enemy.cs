@@ -18,10 +18,10 @@ namespace TeamSpartaDungeonGame.EnemyInfo
         bool isDead;
         Player player;
 
-        public Enemy(string name, int level, int atk, int def, int gold, int exp, Player player)
+        public Enemy(string name, int level,int hp, int atk, int def, int gold, int exp, Player player)
         {
             this.player = player;
-            stats = new EnemyStats(name, level, atk, def, gold, exp);
+            stats = new EnemyStats(name, level, hp, atk, def, gold, exp);
         }
 
         public void Attack()
@@ -45,13 +45,6 @@ namespace TeamSpartaDungeonGame.EnemyInfo
         public void Death()
         {
             Console.ForegroundColor = ConsoleColor.Gray;
-        }
-
-
-
-        public void UsingItem()
-        {
-
         }
 
         public float Critical()

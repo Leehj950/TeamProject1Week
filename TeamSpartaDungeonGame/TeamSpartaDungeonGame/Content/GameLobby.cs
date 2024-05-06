@@ -63,6 +63,7 @@ namespace TeamSpartaDungeonGame.Content
             {
                 case LobbyList.PLAYSTATS:
                     SceneManager.Instance().ScenePlayerStats();
+
                     break;
                 case LobbyList.INVERTER:
                     SceneManager.Instance().SceneInventory();

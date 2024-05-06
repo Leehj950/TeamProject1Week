@@ -11,6 +11,7 @@ namespace TeamSpartaDungeonGame.Manager
     internal class SceneManager
     {
         private static  SceneManager instance;
+
         private GameLobby gameLobby;
         private Dungeon dungeon;
         private RestArea restArea;

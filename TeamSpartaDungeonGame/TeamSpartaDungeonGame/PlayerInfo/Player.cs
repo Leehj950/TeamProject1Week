@@ -1,6 +1,7 @@
 ﻿using TeamSpartaDungeonGame.Interface;
 using TeamSpartaDungeonGame.Utility;
 using TeamSpartaDungeonGame.Manager;
+using TeamSpartaDungeonGame.EnemyInfo;
 
 
 
@@ -18,8 +19,10 @@ namespace TeamSpartaDungeonGame.PlayerInfo
 
     internal class Player : IAction
     {
+        EnemyStats enemyStats;
         SceneManager sceneManager;
         Stat stat;
+        Enemy enemy;
 
         public string name;
         public Stat Stat { get; }
@@ -28,9 +31,9 @@ namespace TeamSpartaDungeonGame.PlayerInfo
             stat = new Stat();
         }
 
-        
+        bool isExit;
 
-        public void Attack() // 수정 많이 해야할듯?
+        public void Select() // 수정 많이 해야할듯?
         {
             Console.WriteLine("공격할 몬스터를 선택해주세요\n");
             Console.WriteLine("1. {0} \n 2. {1} \n 3. {2} \n", 0); // 몬스터가 구현되면 바꿀 예정
@@ -42,14 +45,45 @@ namespace TeamSpartaDungeonGame.PlayerInfo
 
             }
         }
+        public void Attack1(EnemyHp)
+        {
+            Console.WriteLine("공격이 제대로 들어갔다 ! 해치웠나?");
+            EnemyHp -= stat.Atk;
+        }
+
+        public void Attack() 
+        {
+
+        }
         public void ExpGet(int exp)
         {
             stat.Exp += exp;
         }
 
-        public void StatusMenu()
+        public void StatLoop()
         {
             // 캐릭터 상태창
+            while(isExit)
+            {
+                Render();
+                Update();
+            }
+        }
+
+        void Update()
+        {
+           
+            switch (ConsoleUtility.PromptMenuChoice(0, 0))
+            {
+                case 0:
+                    isExit = true;
+                    break;
+                default:
+                    break;
+            }
+        }
+        void Render()
+        {
             stat.PlayerStatus();
         }
         public float Critical() // 크리티컬 배수 1.6을 곱해주기 위해서 float 자료형 사용
@@ -63,7 +97,7 @@ namespace TeamSpartaDungeonGame.PlayerInfo
             finalDmg = new Random().Next((int)(stat.Atk * 0.9), (int)(stat.Atk * 1.1));
             if (critProb <= stat.Crit)
             {
-                Console.WriteLine("운좋게 치명타 발생");
+                Console.WriteLine("운좋게 치명타 발생 ! ! ");
                 finalDmg *= criticalDmg;
             }
 
@@ -75,7 +109,7 @@ namespace TeamSpartaDungeonGame.PlayerInfo
             int dodgeProb;
             int takeDmg; // 받는 데미지
 
-            takeDmg = 0;// 몬스터의 데미지가 구현되면 바꿀 예정
+            takeDmg = enemyStats.Atk;// 몬스터의 데미지가 구현되면 바꿀 예정
             dodgeProb = new Random().Next(1, 100);
             if (dodgeProb <= stat.Dodge)
             {
@@ -139,5 +173,6 @@ namespace TeamSpartaDungeonGame.PlayerInfo
                 }
             }
         }
+        
     }
 }
