@@ -13,36 +13,37 @@ namespace TeamSpartaDungeonGame.EnemyInfo
     internal class Enemy : IAction
     {
         EnemyStats stats;
+        public EnemyStats Stats { get { return stats; } }
+
         bool isDead;
-        Player player;
 
-        public Enemy(string name, int level,int hp, int atk, int def, int gold, int exp, Player player)
+        public Enemy(string name, int level, int hp, int atk, int gold, int exp)
         {
-            this.player = player;
-            stats = new EnemyStats(name, level, hp, atk, def, gold, exp);
+            stats = new EnemyStats(name, level, hp, atk, gold, exp);
         }
-
         public void Attack()
         {
-            Random rendobj = new Random();
-            int rendomValue = rendobj.Next(1, 100);
-            float atkPrents = rendomValue / 100;
-            float dodge = (rendomValue - 100) / 100;
 
-            if (Dodge1(dodge))
-            {
+        }
 
-                player.Stat.Hp -= (int)(stats.Atk * Critical(atkPrents));
-            }
-            else
-            {
-                Console.WriteLine("Player가 회피하였습니다.");
-            }
+        public void Attack(Player player)
+        {
+            Console.Clear();
+            Console.WriteLine($" Lv. {stats.Level} {stats.Name}의 공격");
+            Console.WriteLine($" {player.Stat.Name}를 맞췄습니다. [{ stats.Atk}] ");
+
+
+            Console.Write($"Hp : {player.Stat.Hp} ->");
+
+            player.Stat.Hp -= stats.Atk;
+
+            Console.WriteLine($"{player.Stat.Hp}");
         }
 
         public void Death()
         {
-            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.WriteLine($" Lv. {stats.Level} {stats.Name}");
+            Console.WriteLine($"Hp: {stats.Hp} => Dead");
         }
 
         public float Critical()
@@ -50,28 +51,49 @@ namespace TeamSpartaDungeonGame.EnemyInfo
             return 0.0f;
         }
 
-        public float Critical(float num)
-        {
-            if (num == 0.1f)
-            {
-                return 1.6f;
-            }
-
-            return 1.0f;
-        }
-
         public void Dodge()
         {
 
         }
-        public void Dodge(float num)
+
+        public void PrintStat(bool value, int number)
         {
+            Console.ForegroundColor = ConsoleColor.Green;
+            if (stats.Hp <= 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write($"Lv. {stats.Level} {stats.Name} Dead");
+                Console.WriteLine();
+                Console.ResetColor();
+                return;
+            }
+            if (value == false)
+            {
+                Console.Write($"Lv. {stats.Level} {stats.Name} Hp: {stats.Hp}");
+            }
+            else { value = true; }
+            {
+                Console.Write($"{number +1}. Lv. {stats.Level} {stats.Name} Hp: {stats.Hp}");
+            }
+            Console.WriteLine();
+            Console.ResetColor();
 
         }
 
-        public bool Dodge1(float num)
+        public void PrintBattle(int damage)
         {
-            return false;
+            Console.WriteLine($" Lv. {stats.Level} {stats.Name} [데미지 : {damage}] ");
+            
+            if(stats.Hp <= 0)
+            {
+                Death();
+            }
+            else if(stats.Hp > 0) 
+            {
+                Console.WriteLine();
+                Console.WriteLine($"Lv. {stats.Level} {stats.Name} ");
+                Console.WriteLine($"Hp: {stats.Hp}");
+            }
         }
     }
 }

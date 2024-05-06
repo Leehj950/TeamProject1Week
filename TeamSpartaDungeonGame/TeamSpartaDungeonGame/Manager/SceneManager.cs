@@ -66,7 +66,7 @@ namespace TeamSpartaDungeonGame.Manager
 
         public void SceneInventory()
         {
-            Inventory
+
         }
     }
 }

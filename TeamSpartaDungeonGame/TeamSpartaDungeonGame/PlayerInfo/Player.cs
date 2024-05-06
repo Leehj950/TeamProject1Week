@@ -24,8 +24,7 @@ namespace TeamSpartaDungeonGame.PlayerInfo
         Stat stat;
         Enemy enemy;
 
-        public string name;
-        public Stat Stat { get; }
+        public Stat Stat { get { return stat; } }
         public Player()
         {
             stat = new Stat();
@@ -45,13 +44,16 @@ namespace TeamSpartaDungeonGame.PlayerInfo
 
             }
         }
-        public void Attack1(EnemyHp)
+        public void Attack(Enemy enemy)
         {
-            Console.WriteLine("공격이 제대로 들어갔다 ! 해치웠나?");
-            EnemyHp -= stat.Atk;
+            Console.Clear();
+            Console.WriteLine(stat.Name + "의 공격!");
+            int atk = (int)Critical();
+            enemy.Stats.Hp -= atk;
+            enemy.PrintBattle(atk);
         }
 
-        public void Attack() 
+        public void Attack()
         {
 
         }
@@ -63,7 +65,7 @@ namespace TeamSpartaDungeonGame.PlayerInfo
         public void StatLoop()
         {
             // 캐릭터 상태창
-            while(isExit)
+            while (!isExit)
             {
                 Render();
                 Update();
@@ -72,7 +74,7 @@ namespace TeamSpartaDungeonGame.PlayerInfo
 
         void Update()
         {
-           
+
             switch (ConsoleUtility.PromptMenuChoice(0, 0))
             {
                 case 0:
@@ -84,6 +86,7 @@ namespace TeamSpartaDungeonGame.PlayerInfo
         }
         void Render()
         {
+            Console.Clear();
             stat.PlayerStatus();
         }
         public float Critical() // 크리티컬 배수 1.6을 곱해주기 위해서 float 자료형 사용
@@ -100,6 +103,9 @@ namespace TeamSpartaDungeonGame.PlayerInfo
                 Console.WriteLine("운좋게 치명타 발생 ! ! ");
                 finalDmg *= criticalDmg;
             }
+
+            // 소수점을 바꾸는 점.
+            finalDmg = (float)Math.Round(finalDmg);
 
             return finalDmg;
         }
@@ -120,7 +126,17 @@ namespace TeamSpartaDungeonGame.PlayerInfo
 
         public void CreatePlayer()
         {
+            Console.Clear();
+
+            Console.WriteLine("이름 작성해주세요.");
+            stat.Name = Console.ReadLine();
+
             Console.WriteLine("직업선택");
+
+            Console.WriteLine("프로그래머 : Atk : -5 , Hp : -50 , Mp : +100");
+            Console.WriteLine("거지 : Atk : +30 , Def : +5 , Dodge : +15");
+            Console.WriteLine("가수 : Atk : +5 , Crit : +20 , Critd -= 10");
+            Console.WriteLine("부자 : Hp : -50 , Mp : -50, Def : -5 Atk : -5, Gold : +10000 ");
             Console.WriteLine("1. 프로그래머\n2. 거지\n3. 가수\n4. 부자\n");
             Console.Write("직업을 선택해주세요");
             Console.WriteLine(">>");
@@ -134,21 +150,25 @@ namespace TeamSpartaDungeonGame.PlayerInfo
             switch (num1) // 플레이어 직업 선택에 따른 스탯 변화
             {
                 case (int)PlayerJob.PROGRAMMER:
+                    stat.Job = "프로그래머";
                     stat.Atk -= 5;
                     stat.Hp -= 50;
                     stat.Mp += 100;
                     break;
                 case (int)PlayerJob.POOR:
+                    stat.Job = "거지";
                     stat.Hp += 30;
                     stat.Def += 5;
                     stat.Dodge += 15;
                     break;
                 case (int)PlayerJob.SINGER:
+                    stat.Job = "가수";
                     stat.Atk += 5;
                     stat.Crit += 20;
                     stat.Critd -= 10;
                     break;
                 case (int)PlayerJob.RICH:
+                    stat.Job = "부자";
                     stat.Hp -= 50;
                     stat.Mp -= 50;
                     stat.Def -= 5;
@@ -157,22 +177,33 @@ namespace TeamSpartaDungeonGame.PlayerInfo
                     break;
             }
         }
+
         public void Death()
         {
-            
-            if (stat.Hp == 0)
-            {
-                Console.Clear();
-                Console.WriteLine("운명하셨습니다. . . \n");
-                Console.Write("0. 메인메뉴로 돌아가기\n");
-                int choiceNum = ConsoleUtility.PromptMenuChoice(0, 0);
 
-                if (choiceNum == 0)
-                {
-                    sceneManager.SceneGameLobby();
-                }
-            }
         }
-        
+
+        public bool Death(int hp)
+        {
+            Console.Clear();
+
+            Console.WriteLine("Battle!! - Result");
+            Console.WriteLine();
+            Console.WriteLine("You Lose");
+            Console.WriteLine();
+            Console.WriteLine($"Lv.{hp} -> 0");
+            Console.WriteLine();
+            Console.WriteLine("운명하셨습니다. . . \n");
+            Console.Write("0. 메인메뉴로 돌아가기\n");
+            int choiceNum = ConsoleUtility.PromptMenuChoice(0, 0);
+
+            if (choiceNum == 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
     }
 }

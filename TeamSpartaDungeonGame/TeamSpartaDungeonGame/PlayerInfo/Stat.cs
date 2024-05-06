@@ -12,6 +12,7 @@ namespace TeamSpartaDungeonGame.PlayerInfo
 {
     public class Stat
     {
+
         static private List<Item> inventory;
 
         public int bonusAtk = inventory.Select(item => item.IsEquipped ? item.Atk : 0).Sum();
@@ -23,6 +24,12 @@ namespace TeamSpartaDungeonGame.PlayerInfo
 
         private string name;
         public string Name { get { return name; } set { name = value; } }    // 사용자 이름
+
+
+      
+        private string name;
+        public string Name { get { return name; } set { name = value; } }    // 사용자 이름
+
 
         public string Job { get; set; }
         public int Lv { get; set; }  // 레  벨
