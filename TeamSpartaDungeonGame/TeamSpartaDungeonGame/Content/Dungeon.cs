@@ -23,6 +23,9 @@ namespace TeamSpartaDungeonGame.Content
         /// </summary>
         private bool isExit = false;
         private bool isDungeonExit = false;
+        private bool isEasy;
+        private bool isMedium;
+        private bool isHard;
         /// <summary>
         /// 생성자
         /// </summary>
@@ -40,15 +43,16 @@ namespace TeamSpartaDungeonGame.Content
             switch ((Difficulty)number)
             {
                 case Difficulty.Easy:
-
+                    InDungeonLoop(Difficulty.Easy);
                     break;
                 case Difficulty.Medium:
+                    InDungeonLoop(Difficulty.Medium);
                     break;
                 case Difficulty.Hard:
-
+                    InDungeonLoop(Difficulty.Hard);
                     break;
                 case Difficulty.Boss:
-                    //if()
+                    InDungeonLoop(Difficulty.Boss);
                     break;
                 case Difficulty.Exit:
                     // 이전 게임 로비로 돌아감.
@@ -61,7 +65,18 @@ namespace TeamSpartaDungeonGame.Content
 
         public void Render()
         {
-            //나중에 그리거나 글씨를 출력을 여기서모아서 출력하기.
+            Console.Clear();
+            Console.WriteLine();
+            Console.Write("1.하급던전");
+            Console.WriteLine();
+            Console.Write("2.중급던전");
+            Console.WriteLine();
+            Console.Write("3.상급던전");
+            Console.WriteLine();
+            Console.Write("4.보스방");
+            Console.WriteLine();
+            Console.Write("5.던전이탈");
+            Console.WriteLine();
         }
         public void Loop()
         {
@@ -72,22 +87,22 @@ namespace TeamSpartaDungeonGame.Content
             }
         }
 
-        public void DungeonLoop(Difficulty value)
+        public void InDungeonLoop(Difficulty value)
         {
             Difficulty select = value;
             while (!isDungeonExit)
             {
-                DungeonRender(select);
-                DungeonUpdate(select);
+                InDungeonRender(select);
+                InDungeonUpdate(select);
             }
         }
 
-        public void DungeonRender(Difficulty value)
+        public void InDungeonRender(Difficulty value)
         {
 
         }
 
-        public void DungeonUpdate(Difficulty value)
+        public void InDungeonUpdate(Difficulty value)
         {
 
         }

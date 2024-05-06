@@ -57,6 +57,7 @@ namespace TeamSpartaDungeonGame.Manager
 
         public void SceneRsetArea()
         {
+            restArea.Initialize();
             restArea.Loop();
         }
 

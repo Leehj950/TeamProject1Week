@@ -10,11 +10,15 @@ namespace TeamSpartaDungeonGame.ItemInfo
 {
     internal class Inventory
     {
+
+        bool IsExit;
+        // 장착 loop
+
         private List<Item> inventory;
-        GameManager gameManager = new GameManager(); 
 
         private void InventoryMenu()
         {
+            // Render 
             Console.Clear();
 
             ConsoleUtility.ShowTitle("■ 인벤토리 ■");
@@ -32,10 +36,11 @@ namespace TeamSpartaDungeonGame.ItemInfo
             Console.WriteLine("1. 장착관리");
             Console.WriteLine("");
 
+            /// Update 
             switch (ConsoleUtility.PromptMenuChoice(0, 1))
             {
                 case 0:
-                    gameManager.MainMenu();
+                    //gameManager.MainMenu();
                     break;
                 case 1:
                     EquipMenu();

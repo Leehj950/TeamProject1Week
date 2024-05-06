@@ -1,10 +1,13 @@
-﻿namespace TeamSpartaDungeonGame
+﻿using TeamSpartaDungeonGame.Manager;
+
+namespace TeamSpartaDungeonGame
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            GameManager gameManager = GameManager.Instance();
+            gameManager.StartGame();
         }
     }
 }
