@@ -2,7 +2,7 @@
 
 ## UML
 
-|![UML](https://github.com/Leehj950/TeamProject1Week/blob/main/UML.jpg)|
+![UML](https://github.com/Leehj950/TeamProject1Week/blob/main/UML.jpg)
 
 ## 팀원
 
