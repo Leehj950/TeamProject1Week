@@ -84,7 +84,7 @@ namespace TeamSpartaDungeonGame.Content
 
         void Rest()
         {
-            if (stat.Gold > 100)
+            if (stat.Gold >= 100)
             {
                 iscalculate = true;
                 if (stat.Hp < stat.MaxHp)
