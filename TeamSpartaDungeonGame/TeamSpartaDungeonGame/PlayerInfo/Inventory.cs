@@ -18,11 +18,32 @@ namespace TeamSpartaDungeonGame.PlayerInfo
         private bool isEuiupEXit = false;
         private List<Item> inventory;
 
+        public int bonusAtk = 0;
+        public int bonusDef =0 ;
+        public int bonusHp = 0;
+        public int bonusMp = 0;
+        public int bonusCrit = 0;
+        public float bonusDodge = 0;
+
         public List<Item> Invent { get { return inventory; } }
 
         public Inventory()
         {
             inventory = new List<Item>();
+        }
+
+        public void testin()
+        {
+            if (inventory.Count != 0)
+            {
+                bonusAtk = inventory.Select(item => item.IsEquipped ? item.Atk : 0).Sum();
+                bonusDef = inventory.Select(item => item.IsEquipped ? item.Def : 0).Sum();
+                bonusHp = inventory.Select(item => item.IsEquipped ? item.Hp : 0).Sum();
+                bonusMp = inventory.Select(item => item.IsEquipped ? item.Mp : 0).Sum();
+                bonusCrit = inventory.Select(item => item.IsEquipped ? item.Crit : 0).Sum();
+                bonusDodge = inventory.Select(item => item.IsEquipped ? item.Dodge : 0).Sum();
+            }
+
         }
 
         public void Update()
@@ -69,7 +90,7 @@ namespace TeamSpartaDungeonGame.PlayerInfo
         {
             if (inventory.Count != 0)
             {
-                if (max < inventory.Count)
+                if (max > inventory.Count)
                 {
                     max = inventory.Count;
                 }
@@ -102,7 +123,6 @@ namespace TeamSpartaDungeonGame.PlayerInfo
                     break;
                 default:
                     inventory[KeyInput - 1].ToggleEquipStatus();
-                    EquipMenuLoop();
                     break;
             }
         }

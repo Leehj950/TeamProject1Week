@@ -28,9 +28,9 @@ namespace TeamSpartaDungeonGame.EnemyInfo
 
         public void Attack(Player player)
         {
-            Console.Clear();
+            
             Console.WriteLine($" Lv. {stats.Level} {stats.Name}의 공격");
-            Console.WriteLine($" {player.Stat.Name}를 맞췄습니다. [{ stats.Atk}] ");
+            Console.WriteLine($" {player.Stat.Name}를 맞췄습니다. 데미지 : [{ stats.Atk}] ");
 
 
             Console.Write($"Hp : {player.Stat.Hp} ->");
@@ -82,8 +82,11 @@ namespace TeamSpartaDungeonGame.EnemyInfo
 
         public void PrintBattle(int damage)
         {
-            Console.WriteLine($" Lv. {stats.Level} {stats.Name} [데미지 : {damage}] ");
-            
+            Console.Write($" Lv. {stats.Level} {stats.Name}");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"[데미지 : {damage}] ");
+            Console.ResetColor();
+
             if(stats.Hp <= 0)
             {
                 Death();

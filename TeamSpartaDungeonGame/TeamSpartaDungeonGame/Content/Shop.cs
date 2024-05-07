@@ -134,7 +134,6 @@ namespace TeamSpartaDungeonGame.Content
                         player.Stat.Gold -= storeInventory[keyInput - 1].Price;
                         storeInventory[keyInput - 1].Purchased();
                         inventory.Invent.Add(storeInventory[keyInput - 1]);
-                        PurchaseMenuLoop();
                     }
                     //3 : 돈이 모자라는 경우
                     else
@@ -183,6 +182,7 @@ namespace TeamSpartaDungeonGame.Content
                 PurchaseMenuRender();
                 PurchaseMenuUpdate();
             }
+            isExitPurch = false;
         }
 
         public void SellMenuUpdate()
@@ -199,7 +199,6 @@ namespace TeamSpartaDungeonGame.Content
                     player.Stat.Gold += inventory.Invent[keyInput - 1].Price;
                     inventory.Invent[keyInput - 1].Selled();
                     inventory.Invent.Remove(inventory.Invent[keyInput - 1]);
-                    SellMenuLoop();
                     break;
             }
         }
@@ -234,6 +233,7 @@ namespace TeamSpartaDungeonGame.Content
                 SellMenuRender();
                 SellMenuUpdate();
             }
+            isExitSell = false;
         }
 
         public void NextPage()

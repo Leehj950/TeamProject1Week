@@ -140,13 +140,18 @@ namespace TeamSpartaDungeonGame.Content
         public void InDungeonRender()
         {
             Console.Clear();
-            ConsoleUtility.ShowTitle("배틀");
+            ConsoleUtility.ShowTitle("■  배  틀  ■");
             Console.WriteLine("");
             for (int i = 0; i < enemies.Count; i++)
             {
                 enemies[i].PrintStat(isBattle, i);
             }
+            Console.WriteLine();
+            Console.WriteLine($" {player.Stat.Name} [{player.Stat.Job}]");
+            Console.WriteLine($" Hp: { player.Stat.Hp  }" );
+
             Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine();
             if (isBattle == false)
             {
                 Console.WriteLine("1.전투를 시작하겠습니까?");
@@ -158,6 +163,7 @@ namespace TeamSpartaDungeonGame.Content
                 Console.WriteLine("2.턴넘기기");
                 Console.WriteLine("3.도망치기");
             }
+            Console.WriteLine();
             Console.ResetColor();
         }
 
@@ -181,6 +187,7 @@ namespace TeamSpartaDungeonGame.Content
                 switch ((BattleList)ConsoleUtility.PromptMenuChoice(1, 3))
                 {
                     case BattleList.ATTACK:
+                        isTarget = false;
                         PlayerTurn();
                         break;
                     case BattleList.SKIPTURN:
@@ -202,13 +209,12 @@ namespace TeamSpartaDungeonGame.Content
         }
         void EnemeyTurn()
         {
+            Console.Clear();
+            ConsoleUtility.ShowTitle("■  배  틀  ■");
+            Console.WriteLine("");
             int number;
             while (true)
             {
-                if (enemyCount == 0)
-                {
-
-                }
                 Random random = new Random();
                 number = random.Next(1, enemies.Count + 1);
 
@@ -225,12 +231,21 @@ namespace TeamSpartaDungeonGame.Content
             int curHp = player.Stat.Hp;
 
             enemies[number - 1].Attack(player);
+            Console.WriteLine();
+            Console.WriteLine($" {player.Stat.Name} [{player.Stat.Job}]");
+            Console.WriteLine($" Hp: {player.Stat.Hp}");
+
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("0. 다음") ;
+            Console.ResetColor();
 
             int selet = ConsoleUtility.PromptMenuChoice(0, 0);
 
             if (selet == 0 && player.Stat.Hp > 0)
             {
                 isTarget = true;
+                return;
             }
             else if (selet == 0 && player.Stat.Hp <= 0)
             {
@@ -246,12 +261,15 @@ namespace TeamSpartaDungeonGame.Content
             while (!isTarget)
             {
                 Console.Clear();
-                ConsoleUtility.ShowTitle("배틀");
+                ConsoleUtility.ShowTitle("■  배  틀  ■");
                 Console.WriteLine("");
                 for (int i = 0; i < enemies.Count; i++)
                 {
                     enemies[i].PrintStat(isBattle, i);
                 }
+                Console.WriteLine();
+                Console.WriteLine($" {player.Stat.Name} [{player.Stat.Job} ]");
+                Console.WriteLine($" Hp: {player.Stat.Hp}");
 
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.Green;
@@ -268,16 +286,22 @@ namespace TeamSpartaDungeonGame.Content
             }
             isTarget = false;
         }
-        void PlayerResult(Enemy number)
+        void PlayerResult(Enemy enemy)
         {
             Console.Clear();
             // 전투
-            player.Attack(number);
+            ConsoleUtility.ShowTitle("■  배  틀  ■");
+            Console.WriteLine();
+            player.Attack(enemy);
             // 전투후
-            if (number.Stats.Hp <= 0)
+            if (enemy.Stats.Hp <= 0)
             {
                 enemyCount--;
             }
+
+            Console.WriteLine();
+            Console.WriteLine($" {player.Stat.Name} [{player.Stat.Job} ]");
+            Console.WriteLine($" Hp: {player.Stat.Hp}");
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("0. 다음");

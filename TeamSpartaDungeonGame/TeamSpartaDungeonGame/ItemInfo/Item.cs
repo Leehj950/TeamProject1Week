@@ -25,7 +25,7 @@ namespace TeamSpartaDungeonGame.ItemInfo
         public int Hp { get; }
         public int Mp { get; set; }  // 마  나
         public int Price { get; }
-        public float Crit { get; set; } // 크리티컬 확률
+        public int Crit { get; set; } // 크리티컬 확률
         public float Dodge { get; set; }// 회피 확률
         public bool IsEquipped { get; private set; }
         //장착유무는 이클래스에서만 정의
@@ -33,9 +33,7 @@ namespace TeamSpartaDungeonGame.ItemInfo
         //구매유무는 이클래에서만 정의
         public bool IsSelled { get; private set; }
 
-
-
-        public Item(string name, string desc, ItemType type, int atk, int def, int hp, int mp, int price, float crit,  float dodge, bool isEquipped = false, bool isPurchased = false, bool isSelled = false)
+        public Item(string name, string desc, ItemType type, int atk, int def, int hp, int mp, int price, int crit,  float dodge, bool isEquipped = false, bool isPurchased = false, bool isSelled = false)
         {
             Name = name;
             Desc = desc;
@@ -50,8 +48,8 @@ namespace TeamSpartaDungeonGame.ItemInfo
             IsEquipped = isEquipped;
             IsPurchased = isPurchased;
             IsSelled = isSelled;
-
         }
+
 
         internal void PrintItemStatDesciption(bool withNumber = false, int idx = 0)
         {
