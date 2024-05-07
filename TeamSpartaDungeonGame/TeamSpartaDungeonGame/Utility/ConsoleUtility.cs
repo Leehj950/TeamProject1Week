@@ -44,9 +44,8 @@ namespace TeamSpartaDungeonGame.Utility
                 }
                 else
                 {
-                    Console.Clear();
-                    Thread.Sleep(1000);
                     Console.WriteLine("잘못입력한 값입니다.");
+                    Thread.Sleep(1000);
                 }
             }
         }
