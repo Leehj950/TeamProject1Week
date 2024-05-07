@@ -134,9 +134,16 @@ namespace TeamSpartaDungeonGame.PlayerInfo
             Console.WriteLine("직업선택");
 
             Console.WriteLine("프로그래머 : Atk : -5 , Hp : -50 , Mp : +100");
+<<<<<<< Updated upstream
             Console.WriteLine("거지 : Atk : +30 , Def : +5 , Dodge : +15");
             Console.WriteLine("가수 : Atk : +5 , Crit : +20 , Critd -= 10");
             Console.WriteLine("부자 : Hp : -50 , Mp : -50, Def : -5 Atk : -5, Gold : +10000 ");
+=======
+            Console.WriteLine("거지 : Hp : +30 , Def : +5 , Dodge : +15");
+            Console.WriteLine("가수 : Atk : +5 , Crit : +20 , Critd - 10");
+            Console.WriteLine("부자 : Hp : -50 , Mp : -50, Def : -5 Atk : -5, Gold : +10000 \n");
+            Console.ForegroundColor = ConsoleColor.Green;
+>>>>>>> Stashed changes
             Console.WriteLine("1. 프로그래머\n2. 거지\n3. 가수\n4. 부자\n");
             Console.Write("직업을 선택해주세요");
             Console.WriteLine(">>");
@@ -205,5 +212,39 @@ namespace TeamSpartaDungeonGame.PlayerInfo
             return false;
         }
 
+<<<<<<< Updated upstream
+=======
+        public void PlayerStatus()
+        {
+
+            Console.WriteLine("     [스탯 창]     \n");
+            Console.WriteLine($"이  름          : {Stat.Name}");
+            Console.WriteLine($"직  업          : {Stat.Job}");
+            Console.WriteLine($"LEVEL           : {Stat.Lv}");
+            
+            Console.Write($"공격력          : {Stat.Atk + inventory.bonusAtk}");
+            Console.WriteLine( inventory.bonusAtk > 0 ? $" (+ {inventory.bonusAtk})" : "");
+
+            Console.Write($"방어력          : {Stat.Def + inventory.bonusDef} ");
+            Console.WriteLine(inventory.bonusDef > 0 ? $" (+ {inventory.bonusDef})" : "");
+
+            Console.Write($"체  력          : {Stat.Hp + inventory.bonusHp}");
+            Console.WriteLine(inventory.bonusHp > 0 ? $" (+ {inventory.bonusHp})" : "");
+
+            Console.Write($"마  나          : {Stat.Mp + inventory.bonusMp}");
+            Console.WriteLine(inventory.bonusMp > 0 ? $" (+ {inventory.bonusMp})" : "" );
+
+            Console.Write($"크리티컬 확률   : {Stat.Crit + inventory.bonusCrit} %");
+            Console.WriteLine(inventory.bonusCrit > 0 ? $" (+ {inventory.bonusCrit})" : "");
+
+            Console.WriteLine($"크리티컬 데미지 : {Stat.Critd}");
+
+            Console.Write($"회피 확률 : {Stat.Dodge + inventory.bonusDodge} ");
+            Console.WriteLine(inventory.bonusDodge > 0 ? $" (+ {inventory.bonusDodge})" : "");
+
+            Console.WriteLine($"보유 골드 : {Stat.Gold}\n");
+            Console.WriteLine($"현재 경험치 : {Stat.Exp}\n");
+        }
+>>>>>>> Stashed changes
     }
 }

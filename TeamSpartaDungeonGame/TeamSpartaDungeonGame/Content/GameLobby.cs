@@ -38,11 +38,11 @@ namespace TeamSpartaDungeonGame.Content
             Console.Clear();
             //ConsoleUtility.PrintOutline();
             Console.WriteLine();
-            Console.Write("1.플레이어 스탯창");
+            Console.Write("1. 플레이어 스탯창");
             Console.WriteLine();
-            Console.Write("2.인벤토리");
+            Console.Write("2. 인벤토리");
             Console.WriteLine();
-            Console.Write("3.상점");
+            Console.Write("3. 상점");
             Console.WriteLine();
             Console.Write("4. 휴식처");
             Console.WriteLine();

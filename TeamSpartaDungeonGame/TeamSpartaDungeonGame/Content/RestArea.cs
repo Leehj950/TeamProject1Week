@@ -21,6 +21,7 @@ namespace TeamSpartaDungeonGame.Content
         private bool isRest;
         private bool iscalculate;
         private Stat stat;
+        Inventory inventory;
 
         public RestArea(Stat value)
         {
@@ -44,7 +45,7 @@ namespace TeamSpartaDungeonGame.Content
             {
                 if (iscalculate)
                 {
-                    Console.Write("휴식인 완료되었습니다.");          // 나중에 Console.SetCursorPosition 으로 바꿀 예정
+                    Console.Write("휴식이 완료되었습니다.");          // 나중에 Console.SetCursorPosition 으로 바꿀 예정
                     Console.WriteLine();
                     Console.Write($"현재 체력 : {stat.Hp}");
                     Console.WriteLine();
@@ -79,7 +80,11 @@ namespace TeamSpartaDungeonGame.Content
 
         void Rest()
         {
+<<<<<<< Updated upstream
             if (stat.Gold > 500)
+=======
+            if (stat.Gold >= 100)
+>>>>>>> Stashed changes
             {
                 iscalculate = true;
                 if (stat.Hp < 100)

@@ -18,6 +18,37 @@ namespace TeamSpartaDungeonGame.PlayerInfo
 
         private List<Item> inventory;
 
+<<<<<<< Updated upstream
+=======
+        public int bonusAtk = 0;
+        public int bonusDef =0;
+        public int bonusHp = 0;
+        public int bonusMp = 0;
+        public int bonusCrit = 0;
+        public float bonusDodge = 0;
+
+        public List<Item> Invent { get { return inventory; } }
+
+        public Inventory()
+        {
+            inventory = new List<Item>();
+        }
+
+        public void testin()
+        {
+            if (inventory.Count != 0)
+            {
+                bonusAtk = inventory.Select(item => item.IsEquipped ? item.Atk : 0).Sum();
+                bonusDef = inventory.Select(item => item.IsEquipped ? item.Def : 0).Sum();
+                bonusHp = inventory.Select(item => item.IsEquipped ? item.Hp : 0).Sum();
+                bonusMp = inventory.Select(item => item.IsEquipped ? item.Mp : 0).Sum();
+                bonusCrit = inventory.Select(item => item.IsEquipped ? item.Crit : 0).Sum();
+                bonusDodge = inventory.Select(item => item.IsEquipped ? item.Dodge : 0).Sum();
+            }
+
+        }
+
+>>>>>>> Stashed changes
         public void Update()
         {
             switch (ConsoleUtility.PromptMenuChoice(0, 3))

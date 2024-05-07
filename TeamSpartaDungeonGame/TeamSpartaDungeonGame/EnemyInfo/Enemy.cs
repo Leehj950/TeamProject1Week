@@ -30,7 +30,11 @@ namespace TeamSpartaDungeonGame.EnemyInfo
         {
             Console.Clear();
             Console.WriteLine($" Lv. {stats.Level} {stats.Name}의 공격");
+<<<<<<< Updated upstream
             Console.WriteLine($" {player.Stat.Name}를 맞췄습니다. [{ stats.Atk}] ");
+=======
+            Console.WriteLine($" {player.Stat.Name}을(를) 맞췄습니다. 데미지 : [{ stats.Atk}] ");
+>>>>>>> Stashed changes
 
 
             Console.Write($"Hp : {player.Stat.Hp} ->");
