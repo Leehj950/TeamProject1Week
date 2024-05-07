@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace TeamSpartaDungeonGame.Interface
 {
-    internal interface IAction
+    internal interface IFramework
     {
-
-        public void Attack();
-        public void Death();
-        public float Critical();
-        public void Dodge();
+        public void Update();
+        public void Render();
+        public void Loop();
     }
 }
-
